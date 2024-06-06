@@ -2,6 +2,12 @@
 const hourDisplay = document.querySelector(".hour");
 // create variable for chime sound
 const hourChime = document.getElementById("hour-chime");
+// to-do list variables
+const toggleButton = document.getElementById("toggle-button");
+const toDoContainer = document.getElementById("to-do-container");
+const toDoList = document.getElementById("to-do-list");
+const toDo = document.getElementById("to-do");
+const addToDo = document.getElementById("add-to-do");
 
 function updateTime() {
   // store the current time in a variable
@@ -41,4 +47,77 @@ function setHourDisplay(timeDisplay) {
   hourDisplay.textContent = timeDisplay;
 }
 
+// show or hide the to-do form
+function toggleToDo() {
+  toDoContainer.classList.toggle("hidden");
+}
+
+// add to-do item to the list
+function addToDoItem() {
+  const toDoItem = toDo.value;
+  if (toDoItem) {
+    const listDiv = document.createElement("div");
+    const deleteButton = document.createElement("button");
+    const checkbox = document.createElement("input");
+    const li = document.createElement("li");
+
+    listDiv.classList.add("list-item");
+    deleteButton.textContent = "✖️";
+    deleteButton.classList.add("delete-button");
+    checkbox.type = "checkbox";
+
+    listDiv.appendChild(checkbox);
+    li.textContent = toDoItem;
+    listDiv.appendChild(li);
+    listDiv.appendChild(deleteButton);
+    toDoList.appendChild(listDiv);
+    toDo.value = "";
+    saveToDoList();
+  }
+}
+
+// remove to-do item from the list
+function removeToDoItem(e) {
+  if (e.target.classList.contains("delete-button")) {
+    e.target.parentElement.remove();
+    saveToDoList();
+  }
+}
+
+// line through to-do item when checkbox is checked
+function lineThrough(e) {
+  if (e.target.checked) {
+    e.target.nextElementSibling.style.textDecoration = "line-through";
+    e.target.nextElementSibling.style.color = "gray";
+  } else {
+    e.target.nextElementSibling.style.textDecoration = "none";
+    e.target.nextElementSibling.style.color = "black";
+  }
+
+  saveToDoList();
+}
+
+// save to-do list to local storage
+function saveToDoList() {
+  localStorage.setItem("toDoList", toDoList.innerHTML);
+}
+
+// load to-do list from local storage
+function loadToDoList() {
+  const toDoListItems = localStorage.getItem("toDoList");
+  if (toDoListItems) {
+    toDoList.innerHTML = toDoListItems;
+  }
+}
+
+// run the updateTime function when the page loads
 updateTime();
+
+// run the loadToDoList function when the page loads
+loadToDoList();
+
+// add event listeners to the buttons
+toggleButton.addEventListener("click", toggleToDo);
+addToDo.addEventListener("click", addToDoItem);
+toDoList.addEventListener("click", removeToDoItem);
+toDoList.addEventListener("change", lineThrough);

@@ -17,14 +17,14 @@
 
 ## To-Do List
 
-- [ ] Add to-do list
-- [ ] Create to-do list section in HTML
+- [x] Add to-do list
+- [x] Create to-do list section in HTML
 - A menu which pops up on click (hidden by default)
-- [ ] Add JavaScript for list pop-up toggle
-- [ ] Write function to add to-do list item
-- [ ] Write function to complete to-do list item
-- [ ] Add CSS styling for to-do list and entries
-- [ ] Decide whether to store to-do entries and status locally, or reset when the page is closed
+- [x] Add JavaScript for list pop-up toggle
+- [x] Write function to add to-do list item
+- [x] Write function to complete to-do list item
+- [x] Add CSS styling for to-do list and entries
+- [x] Decide whether to store to-do entries and status locally, or reset when the page is closed
 - Depending on decision, more to-do entries may be needed here
 
 ## Deadline Timer
