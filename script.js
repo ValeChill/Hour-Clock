@@ -9,9 +9,12 @@ function updateTime() {
   let midday = "am";
 
   // if it's after 12pm, change midday variable to pm and substract 12 from hour
-  if (h > 12) {
-    h -= 12;
-    midday = "pm"
+  //Fix for 12pm and 12am -> was 12am and 0am before.
+  if (h >= 12) {
+    h = h === 12 ? h : h - 12;
+    midday = "pm";
+  } else if (h === 0) {
+    h = 12;
   }
 
   // string containing the hour and am/pm
