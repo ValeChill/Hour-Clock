@@ -2,7 +2,7 @@
 
 ## Display Hour
 - [ ] Display the current hour (not minutes)
- - [ ] Center hour display in page
+ - [x] Center hour display in page
  - [ ] Ensure display accurately updates when an hour passes
  - [ ] Add basic styling with CSS
 
