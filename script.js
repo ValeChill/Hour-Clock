@@ -1,5 +1,7 @@
 // create a variable that accesses the div where the hour will be displayed
-const hourDisplay = document.querySelector('.hour');
+const hourDisplay = document.querySelector(".hour");
+// create variable for chime sound
+const hourChime = document.getElementById("hour-chime");
 
 function updateTime() {
   // store the current time in a variable
@@ -23,6 +25,11 @@ function updateTime() {
   // update the display if the hour has changed since last time the code ran
   if (hourDisplay.textContent != timeDisplay) {
     setHourDisplay(timeDisplay);
+  }
+
+  // play chime sound every hour
+  if (time.getMinutes() === 0 && time.getSeconds() === 0) {
+    hourChime.play();
   }
 
   // wait for one second, then run this code again

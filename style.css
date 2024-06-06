@@ -8,21 +8,34 @@ everything) */
 
 /* :root selector is the very lowest level of the website */
 :root {
-  /* I've set font-size back to 16px; feel free to change if you want */
-  font-size: 16px;
+  /* Large font size for hour display */
+  font-size: 6rem;
 }
 
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: cornsilk;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f7f3e9; /* Soft cream background */
 }
-.clock-container{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    /* This should still be the same size as before */
-    font-size: 8rem;
-    color: brown;
+
+.clock-container {
+  font-family: "Trebuchet MS", sans-serif; /* Clean, modern font */
+  color: #4d4d4d; /* Soft dark grey for text */
+  background-color: #ffffff; /* White background for clock */
+  border: 3px solid #e0e0e0; /* Light grey border */
+  border-radius: 20px; /* Rounded corners */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+}
+
+/* Center hour in the middle of the clock */
+.clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 200px;
 }
