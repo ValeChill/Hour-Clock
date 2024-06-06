@@ -1,10 +1,10 @@
 # Project Checklist
 
 ## Display Hour
-- [ ] Display the current hour (not minutes)
+- [x] Display the current hour (not minutes)
  - [x] Center hour display in page
- - [ ] Ensure display accurately updates when an hour passes
- - [ ] Add basic styling with CSS
+ - [x] Ensure display accurately updates when an hour passes
+ - [x] Add basic styling with CSS
 
 ## Hourly Chime
 - [ ] Implement hourly chime
