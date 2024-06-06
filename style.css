@@ -1,3 +1,17 @@
+/* Padding and margin on elements can have surprising results with element size,
+so it's considered good practice to set them to 0 for every element ("*" selects
+everything) */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* :root selector is the very lowest level of the website */
+:root {
+  /* I've set font-size back to 16px; feel free to change if you want */
+  font-size: 16px;
+}
+
 body{
     display: flex;
     justify-content: center;
@@ -5,11 +19,10 @@ body{
     height: 100vh;
     margin: 0;
     background-color: cornsilk;
-    font-size: 50px;
 }
 .clock-container{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* This should still be the same size as before */
     font-size: 8rem;
     color: brown;
 }
-
