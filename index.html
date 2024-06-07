@@ -7,22 +7,23 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="clock-container">
-      <div class="clock">
-        <div class="hour"></div>
-      </div>
-    </div>
-    <span id="toggle-button">+</span>
-    <div id="to-do-container" class="hidden">
-      <div id="to-do-form">
+    <!-- Removed unecessary clock-container div and replaced
+     clock div with article for improved semantic meaning -->
+    <article class="clock">
+      <!-- Set hour to h2 instead of div for improved semantic meaning -->
+      <h2 class="hour"></h2>
+    </article>
+    <article id="toggle-section">
+      <button id="toggle-button">+</button>
+      <section id="to-do-container" class="hidden">
         <h2>To-Do List</h2>
         <ul id="to-do-list">
           <!-- To-do items will be added here -->
         </ul>
         <input id="to-do" type="text" placeholder="Add a to-do" />
         <button id="add-to-do">Add</button>
-      </div>
-    </div>
+      </section>  
+    </article>
     <!-- Audio file for the chime -->
     <audio id="hour-chime" src="audio/chime.mp3"></audio>
     <script src="script.js"></script>
