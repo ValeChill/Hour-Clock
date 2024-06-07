@@ -51,12 +51,12 @@
 ## Colour Themes
 
 - [ ] Enable customisable colour themes
-- [ ] Ensure colours in CSS are set with variables rather than literals
+- [x] Ensure colours in CSS are set with variables rather than literals
 - [ ] Design a handful of colour themes
-- [ ] Add a settings pop-up to HTML
-- [ ] Add JavaScript to toggle settings pop-up
-- [ ] Add styling for settings pop-up
-- [ ] Add list of colour themes to settings pop-up
+- [x] Add a settings pop-up to HTML
+- [x] Add JavaScript to toggle settings pop-up
+- [x] Add styling for settings pop-up
+- [x] Add list of colour themes to settings pop-up
 - [ ] Add CSS styling for list of colour themes
 - [ ] Add JavaScript function to update CSS variables to match selected colour theme
 
@@ -89,12 +89,13 @@
 - [ ] Add styling for each sound display
 
 ## Pomodoro Feature
+
 - [ ] Add pomodoro feature
 - [ ] Add pomodoro pop-up in HTML
- - [ ] Include HTML to set work timer and break timer
+- [ ] Include HTML to set work timer and break timer
 - [ ] Add JavaScript for pomodoro pop-up toggle
 - [ ] Write function to set pomodoro timer (take duration as input for work or break)
 - [ ] Add HTML display for active pomodoro timer
- - [ ] Ensure timer is only visible while active
+- [ ] Ensure timer is only visible while active
 - [ ] Add CSS styling for to-do list and entries
 - [ ] Decide whether to store to-do entries and status locally, or reset when the page is closed
