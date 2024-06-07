@@ -87,3 +87,14 @@
 - [ ] For each sound added, add sound and a slider (default value 0) to the soundscape menu
 - [ ] For each sound, add JavaScript to start playing if slider value > 0, and to update volume
 - [ ] Add styling for each sound display
+
+## Pomodoro Feature
+- [ ] Add pomodoro feature
+- [ ] Add pomodoro pop-up in HTML
+ - [ ] Include HTML to set work timer and break timer
+- [ ] Add JavaScript for pomodoro pop-up toggle
+- [ ] Write function to set pomodoro timer (take duration as input for work or break)
+- [ ] Add HTML display for active pomodoro timer
+ - [ ] Ensure timer is only visible while active
+- [ ] Add CSS styling for to-do list and entries
+- [ ] Decide whether to store to-do entries and status locally, or reset when the page is closed
