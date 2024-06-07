@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PureHour</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="clock-container">
-        <div class="clock">
-            <div class="hour"></div>
-        </div>
-    </div>        
+      <div class="clock">
+        <div class="hour"></div>
+      </div>
+    </div>
+    <span id="toggle-button">+</span>
+    <div id="to-do-container" class="hidden">
+      <div id="to-do-form">
+        <h2>To-Do List</h2>
+        <ul id="to-do-list">
+          <!-- To-do items will be added here -->
+        </ul>
+        <input id="to-do" type="text" placeholder="Add a to-do" />
+        <button id="add-to-do">Add</button>
+      </div>
+    </div>
+    <!-- Audio file for the chime -->
+    <audio id="hour-chime" src="audio/chime.mp3"></audio>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

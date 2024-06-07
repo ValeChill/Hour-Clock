@@ -8,21 +8,126 @@ everything) */
 
 /* :root selector is the very lowest level of the website */
 :root {
-  /* I've set font-size back to 16px; feel free to change if you want */
+  /* Large font size for hour display */
   font-size: 16px;
 }
 
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: cornsilk;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f7f3e9; /* Soft cream background */
 }
-.clock-container{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    /* This should still be the same size as before */
-    font-size: 8rem;
-    color: brown;
+
+/* Clock styling */
+
+.clock-container {
+  font-family: "Trebuchet MS", sans-serif; /* Clean, modern font */
+  color: #4d4d4d; /* Soft dark grey for text */
+  background-color: #ffffff; /* White background for clock */
+  border: 3px solid #e0e0e0; /* Light grey border */
+  border-radius: 20px; /* Rounded corners */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+}
+
+/* Center hour in the middle of the clock */
+.clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 200px;
+}
+
+/* Large font size for hour display */
+.hour {
+  font-size: 6rem;
+}
+
+/* To-do list styling */
+
+.hidden {
+  display: none !important;
+}
+
+#toggle-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #4d4d4d; /* Dark grey background */
+  color: #ffffff; /* White text */
+  font-size: 30px;
+  border: none;
+  border-radius: 5px; /* Slightly rounded corners */
+  padding: 10px 20px; /* Padding inside button */
+  margin-top: 20px; /* Space between clock and button */
+  cursor: pointer; /* Cursor changes to pointer on hover */
+}
+
+#to-do-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff; /* White background */
+  padding: 65px;
+  font-size: 30px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+}
+
+#to-do-form h2 {
+  text-align: center;
+}
+
+#to-do-list {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;
+  margin-top: 20px; /* Space between form and list */
+}
+
+#to-do {
+  padding: 10px;
+  border: 1px solid #e0e0e0; /* Light grey border */
+  border-radius: 5px; /* Slightly rounded corners */
+  margin-right: 10px; /* Space between input and button */
+}
+
+#add-to-do {
+  background-color: #4d4d4d; /* Dark grey background */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 5px; /* Slightly rounded corners */
+  margin-top: 10px; /* Space between input and button */
+  padding: 10px 20px; /* Padding inside button */
+  cursor: pointer; /* Cursor changes to pointer on hover */
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e0e0e0; /* Light grey border */
+  border-radius: 5px; /* Slightly rounded corners */
+  margin-top: 10px; /* Space between list items */
+}
+
+.list-item input {
+  margin-right: 10px; /* Space between checkbox and text */
+}
+
+.list-item li {
+  flex: 1; /* Take up all available space */
+  padding-right: 10px; /* Space between text and button */
+}
+
+.list-item button {
+  border: 1px solid #e0e0e0; /* Light grey border */
+  border-radius: 5px; /* Slightly rounded corners */
+  padding: 5px 10px; /* Padding inside button */
+  cursor: pointer; /* Cursor changes to pointer on hover */
 }
