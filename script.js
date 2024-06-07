@@ -9,37 +9,40 @@ const toDoList = document.querySelector("#to-do-list");
 const toDo = document.querySelector("#to-do");
 const addToDo = document.querySelector("#add-to-do");
 
-function updateTime() {
-  // store the current time in a variable
-  const time = new Date();
-  // get the current hour (24 hour format)
+function getHourString(time) {
   let h = time.getHours();
   let midday = "am";
 
   // if it's after 12pm, change midday variable to pm and substract 12 from hour
-  //Fix for 12pm and 12am -> was 12am and 0am before.
+  // Fix for 12pm and 12am -> was 12am and 0am before.
   if (h >= 12) {
     h = h === 12 ? h : h - 12;
     midday = "pm";
   } else if (h === 0) {
     h = 12;
   }
+  
+  return `${h}${midday}`;
+}
 
-  // string containing the hour and am/pm
-  let timeDisplay = `${h}${midday}`;
+function updateTime() {
+  // store the current time in a variable
+  const time = new Date();
 
-  // update the display if the hour has changed since last time the code ran
-  if (hourDisplay.textContent != timeDisplay) {
-    setHourDisplay(timeDisplay);
-  }
+  timeDisplay = getHourString(time);
 
-  // play chime sound every hour
-  if (time.getMinutes() === 0 && time.getSeconds() === 0) {
-    hourChime.play();
-  }
+  // run hour-change events if hour has changed since last time code ran
+  hourDisplay.textContent != timeDisplay ? onNewHour(timeDisplay) : null;
 
   // wait for one second, then run this code again
   setTimeout(updateTime, 1000);
+}
+
+function onNewHour(timeDisplay) {
+  setHourDisplay(timeDisplay);
+  // hourChime volume reduced so it's less disruptive to user workflow
+  hourChime.volume = 0.7;
+  hourChime.play();
 }
 
 function setHourDisplay(timeDisplay) {
@@ -110,7 +113,8 @@ function loadToDoList() {
   }
 }
 
-// run the updateTime function when the page loads
+// set the time and run the updateTime function when the page loads
+setHourDisplay(getHourString(new Date()));
 updateTime();
 
 // run the loadToDoList function when the page loads
