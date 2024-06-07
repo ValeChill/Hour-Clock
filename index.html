@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PureHour</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <!-- Removed unecessary clock-container div and replaced
@@ -102,15 +102,21 @@
       <section id="settings-container" class="hidden section-container">
         <h2>Settings</h2>
         <h4>Color Themes</h4>
-        <button class="color-button" id="latte">🌻 Latte</button>
-        <button class="color-button" id="frappe">🪴 Frappé</button>
-        <button class="color-button" id="macchiato">🌺 Macchiato</button>
-        <button class="color-button" id="mocha">🌿 Mocha</button>
+        <div id="colors">
+          <button class="color-button" id="latte">🌻 Latte</button>
+          <button class="color-button" id="sereneDawn">🌱 Serene Dawn</button>
+          <button class="color-button" id="twilightBlossom">
+            🌸 Twilight Blossom
+          </button>
+          <button class="color-button" id="autumnHarvest">
+            🌿 Autumun Harvest
+          </button>
+        </div>
       </section>
     </article>
     <!-- Audio file for the chime -->
     <audio id="hour-chime" src="audio/chime.mp3"></audio>
-    <script src="script.js"></script>
-    <script src="config/config.js"></script>
+    <script type="module" src="js/script.js"></script>
+    <script type="module" src="config/config.js"></script>
   </body>
 </html>

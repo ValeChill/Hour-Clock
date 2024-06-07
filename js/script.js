@@ -1,3 +1,6 @@
+// import colors
+import { themes } from "../config/config.js";
+
 // create a variable that accesses the div where the hour will be displayed
 const hourDisplay = document.querySelector(".hour");
 // create variable for chime sound
@@ -11,6 +14,7 @@ const addToDo = document.querySelector("#add-to-do");
 // settings variables
 const settingsButton = document.querySelector(".settings-button");
 const settingsContainer = document.querySelector("#settings-container");
+const colorButtons = document.querySelectorAll(".color-button");
 
 function getHourString(time) {
   let h = time.getHours();
@@ -32,7 +36,7 @@ function updateTime() {
   // store the current time in a variable
   const time = new Date();
 
-  timeDisplay = getHourString(time);
+  let timeDisplay = getHourString(time);
 
   // run hour-change events if hour has changed since last time code ran
   hourDisplay.textContent != timeDisplay ? onNewHour(timeDisplay) : null;
@@ -129,9 +133,23 @@ function loadToDoList() {
   }
 }
 
+// change colors via button clicks
+function changeColor(value = themes.default) {
+  const color = value;
+  Object.keys(color).forEach((colorKey) => {
+    document.documentElement.style.setProperty(
+      `--${colorKey}`,
+      color[colorKey]
+    );
+  });
+}
+
 // set the time and run the updateTime function when the page loads
 setHourDisplay(getHourString(new Date()));
 updateTime();
+
+// run the changeColor function when the page loads so default colors are set
+changeColor();
 
 // run the loadToDoList function when the page loads
 loadToDoList();
@@ -142,3 +160,10 @@ settingsButton.addEventListener("click", toggleSettings);
 addToDo.addEventListener("click", addToDoItem);
 toDoList.addEventListener("click", removeToDoItem);
 toDoList.addEventListener("change", lineThrough);
+
+// add event listeners to the color buttons
+colorButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    changeColor(themes[button.id]);
+  });
+});

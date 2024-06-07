@@ -50,15 +50,15 @@
 
 ## Colour Themes
 
-- [ ] Enable customisable colour themes
+- [x] Enable customisable colour themes
 - [x] Ensure colours in CSS are set with variables rather than literals
-- [ ] Design a handful of colour themes
+- [x] Design a handful of colour themes
 - [x] Add a settings pop-up to HTML
 - [x] Add JavaScript to toggle settings pop-up
 - [x] Add styling for settings pop-up
 - [x] Add list of colour themes to settings pop-up
-- [ ] Add CSS styling for list of colour themes
-- [ ] Add JavaScript function to update CSS variables to match selected colour theme
+- [x] Add CSS styling for list of colour themes
+- [x] Add JavaScript function to update CSS variables to match selected colour theme
 
 ## Optional minute visibility
 

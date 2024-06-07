@@ -168,3 +168,9 @@ h2 {
   font-size: 1em;
   padding: 5px 10px;
 }
+
+#colors {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
