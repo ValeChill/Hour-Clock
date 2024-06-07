@@ -1,10 +1,25 @@
+:root { /* Base color variables are stored here, change them in config.js */
+  --text-color: #4d4d4d; /* Soft dark grey for text */
+  --background-color: #f7f3e9; /* Soft cream background */
+  --clock-background-color: #ffffff; /* White background for clock */
+  --clock-border-color: #e0e0e0; /* Light grey border for clock */
+  --button-background-color: #4d4d4d; /* Dark grey background for buttons */
+  --button-text-color: #ffffff; /* White text for buttons */
+  --todo-background-color: #ffffff; /* White background for to-do list */
+  --todo-textbox-border-color: #e0e0e0; /* Light grey border for text box */
+  --todo-items-border-color: #e0e0e0; /* Light grey border for list items */
+  --todo-items-background-color: #ffffff; /* White background for list items */
+  --delete-button-background-color: #ffffff; /* Light grey border for delete button */
+  --delete-button-border-color: #e0e0e0; /* Light grey border for delete button */
+}
+
 /* Padding and margin on elements can have surprising results with element size,
 so it's considered good practice to set them to 0 for every element ("*" selects
 everything) */
 * {
   padding: 0;
   margin: 0;
-  color: #4d4d4d; /* Soft dark grey for text */
+  color: var(--text-color); /* See :root */
 }
 
 /* Removed root font-size in px setting for accessibility */
@@ -15,15 +30,15 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #f7f3e9; /* Soft cream background */
+  background-color: var(--background-color); /* See :root */
   font-family: "Trebuchet MS", sans-serif; /* Clean, modern font */
 }
 
 /* Clock styling */
 
 .clock {
-  background-color: #ffffff; /* White background for clock */
-  border: 3px solid #e0e0e0; /* Light grey border */
+  background-color: var(--clock-background-color); /* See :root */
+  border: 3px solid var(--clock-border-color); /* See :root */
   border-radius: 20px; /* Rounded corners */
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
@@ -51,8 +66,8 @@ body {
 
 /* Move generic button styling to generic button tag */
 button {
-  background-color: #4d4d4d; /* Dark grey background */
-  color: #ffffff; /* White text */
+  background-color: var(--button-background-color); /* See :root */
+  color: var(--button-text-color); /* See :root */
   font-size: 2rem;
   border: none;
   border-radius: 5px; /* Slightly rounded corners */
@@ -72,7 +87,7 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #ffffff; /* White background */
+  background-color: var(--todo-background-color); /* See :root */
   padding: 4rem;
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
@@ -92,7 +107,7 @@ h2 {
 #to-do {
   font-size: 1em;
   padding: 0.7em;
-  border: 1px solid #e0e0e0; /* Light grey border */
+  border: 1px solid var(--todo-textbox-border-color); /* See :root */
   border-radius: 5px; /* Slightly rounded corners */
   margin-right: 10px; /* Space between input and button */
 }
@@ -106,14 +121,16 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 0.6em;
-  border: 1px solid #e0e0e0; /* Light grey border */
+  border: 1px solid var(--todo-items-border-color); /* See :root */
+  background-color: var(--todo-items-background-color); /* See :root */
   border-radius: 5px; /* Slightly rounded corners */
   margin-top: 10px; /* Space between list items */
+  margin-bottom: 10px; /* Space between list item and todo textbox */
 }
 
 .delete-button {
   font-size: 1em;
-  background-color: #ffffff;
+  background-color: var(--delete-button-background-color); /* See :root */
 }
 
 .list-item input {
@@ -126,7 +143,7 @@ h2 {
 }
 
 .list-item button {
-  border: 1px solid #e0e0e0; /* Light grey border */
+  border: 1px solid var(--delete-button-border-color); /* See :root */
   border-radius: 5px; /* Slightly rounded corners */
   padding: 5px 10px; /* Padding inside button */
   cursor: pointer; /* Cursor changes to pointer on hover */
