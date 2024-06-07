@@ -1,13 +1,13 @@
 // create a variable that accesses the div where the hour will be displayed
 const hourDisplay = document.querySelector(".hour");
 // create variable for chime sound
-const hourChime = document.getElementById("hour-chime");
+const hourChime = document.querySelector("#hour-chime");
 // to-do list variables
-const toggleButton = document.getElementById("toggle-button");
-const toDoContainer = document.getElementById("to-do-container");
-const toDoList = document.getElementById("to-do-list");
-const toDo = document.getElementById("to-do");
-const addToDo = document.getElementById("add-to-do");
+const toggleButton = document.querySelector(".toggle-button");
+const toDoContainer = document.querySelector("#to-do-container");
+const toDoList = document.querySelector("#to-do-list");
+const toDo = document.querySelector("#to-do");
+const addToDo = document.querySelector("#add-to-do");
 
 function updateTime() {
   // store the current time in a variable
