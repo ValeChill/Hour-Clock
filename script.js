@@ -8,6 +8,9 @@ const toDoContainer = document.querySelector("#to-do-container");
 const toDoList = document.querySelector("#to-do-list");
 const toDo = document.querySelector("#to-do");
 const addToDo = document.querySelector("#add-to-do");
+// settings variables
+const settingsButton = document.querySelector(".settings-button");
+const settingsContainer = document.querySelector("#settings-container");
 
 function getHourString(time) {
   let h = time.getHours();
@@ -21,7 +24,7 @@ function getHourString(time) {
   } else if (h === 0) {
     h = 12;
   }
-  
+
   return `${h}${midday}`;
 }
 
@@ -53,6 +56,19 @@ function setHourDisplay(timeDisplay) {
 // show or hide the to-do form
 function toggleToDo() {
   toDoContainer.classList.toggle("hidden");
+  // if settings form is not hidden, hide it
+  if (settingsContainer.classList.contains("hidden") === false) {
+    settingsContainer.classList.add("hidden");
+  }
+}
+
+// show or hide the settings form
+function toggleSettings() {
+  settingsContainer.classList.toggle("hidden");
+  // if to-do form is not hidden, hide it
+  if (toDoContainer.classList.contains("hidden") === false) {
+    toDoContainer.classList.add("hidden");
+  }
 }
 
 // add to-do item to the list
@@ -122,6 +138,7 @@ loadToDoList();
 
 // add event listeners to the buttons
 toggleButton.addEventListener("click", toggleToDo);
+settingsButton.addEventListener("click", toggleSettings);
 addToDo.addEventListener("click", addToDoItem);
 toDoList.addEventListener("click", removeToDoItem);
 toDoList.addEventListener("change", lineThrough);
