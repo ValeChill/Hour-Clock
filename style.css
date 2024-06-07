@@ -1,4 +1,5 @@
-:root { /* Base color variables are stored here, change them in config.js */
+:root {
+  /* Base color variables are stored here, change them in config.js */
   --text-color: #4d4d4d; /* Soft dark grey for text */
   --background-color: #f7f3e9; /* Soft cream background */
   --clock-background-color: #ffffff; /* White background for clock */
@@ -55,7 +56,6 @@ body {
 .hour {
   font-size: 6em;
   font-weight: normal;
-
 }
 
 /* To-do list styling */
@@ -77,8 +77,16 @@ button {
 
 .toggle-button {
   position: absolute;
+  top: 90px;
+  right: 20px;
+  display: flex;
+}
+
+.settings-button {
+  position: absolute;
   top: 20px;
   right: 20px;
+  display: flex;
 }
 
 /* Move generic styling to class rather than to-do ID */
@@ -147,4 +155,16 @@ h2 {
   border-radius: 5px; /* Slightly rounded corners */
   padding: 5px 10px; /* Padding inside button */
   cursor: pointer; /* Cursor changes to pointer on hover */
+}
+
+/* Settings styling */
+
+.settings-section h4 {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.color-button {
+  font-size: 1em;
+  padding: 5px 10px;
 }
