@@ -14,7 +14,9 @@
       <h2 class="hour"></h2>
     </article>
     <article class="toggle-section">
-      <button class="toggle-button">+</button>
+      <button class="toggle-button">
+        <box-icon id="todo-icon"></box-icon>
+      </button>
       <section id="to-do-container" class="hidden section-container">
         <h2>To-Do List</h2>
         <ul id="to-do-list">
@@ -26,8 +28,23 @@
         </form>
       </section>  
     </article>
+    <article class="settings-section">
+      <button class="settings-button">
+        <box-icon id="settings-icon"></box-icon>
+      </button>
+      <section id="settings-container" class="hidden section-container">
+        <h2>Settings</h2>
+        <h4>Color Themes</h4>
+        <button class="color-button" id="latte">🌻 Latte</button>
+        <button class="color-button" id="frappe">🪴 Frappé</button>
+        <button class="color-button" id="macchiato">🌺 Macchiato</button>
+        <button class="color-button" id="mocha">🌿 Mocha</button>
+      </section>
+    </article>
     <!-- Audio file for the chime -->
     <audio id="hour-chime" src="audio/chime.mp3"></audio>
     <script src="script.js"></script>
+    <script src="config/config.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script> <!-- Import BoxIcons instead of svg -->
   </body>
 </html>
