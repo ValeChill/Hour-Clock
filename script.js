@@ -7,7 +7,11 @@ const toggleButton = document.querySelector(".toggle-button");
 const toDoContainer = document.querySelector("#to-do-container");
 const toDoList = document.querySelector("#to-do-list");
 const toDo = document.querySelector("#to-do");
-const addToDo = document.querySelector("#add-to-do");
+const toDoForm = document.querySelector("#to-do-form");
+
+// list of to-do items and status
+let toDoEntries = [];
+
 // settings variables
 const settingsButton = document.querySelector(".settings-button");
 const settingsContainer = document.querySelector("#settings-container");
@@ -72,45 +76,72 @@ function toggleSettings() {
 }
 
 // add to-do item to the list
-function addToDoItem() {
+function addToDoItem(event) {
+  event.preventDefault();
   const toDoItem = toDo.value;
   if (toDoItem) {
-    const listDiv = document.createElement("div");
-    const deleteButton = document.createElement("button");
-    const checkbox = document.createElement("input");
-    const li = document.createElement("li");
-
-    listDiv.classList.add("list-item");
-    deleteButton.textContent = "✖️";
-    deleteButton.classList.add("delete-button");
-    checkbox.type = "checkbox";
-
-    listDiv.appendChild(checkbox);
-    li.textContent = toDoItem;
-    listDiv.appendChild(li);
-    listDiv.appendChild(deleteButton);
-    toDoList.appendChild(listDiv);
+    displayNewToDo(toDoItem);
+    toDoEntries.push({item: toDoItem, value: false});
     toDo.value = "";
     saveToDoList();
   }
+}
+
+function displayNewToDo(text, complete=false) {
+  const listDiv = document.createElement("div");
+  const deleteButton = document.createElement("button");
+  const checkbox = document.createElement("input");
+  const li = document.createElement("li");
+
+  listDiv.classList.add("list-item");
+  deleteButton.textContent = "✖️";
+  deleteButton.classList.add("delete-button");
+  checkbox.type = "checkbox";
+
+  if (complete==true) {
+    checkbox.checked = true;
+    li.style.textDecoration = "line-through";
+    li.style.color = "gray";
+  }
+
+  listDiv.appendChild(checkbox);
+  li.textContent = text;
+  listDiv.appendChild(li);
+  listDiv.appendChild(deleteButton);
+  toDoList.appendChild(listDiv);
 }
 
 // remove to-do item from the list
 function removeToDoItem(e) {
   if (e.target.classList.contains("delete-button")) {
     e.target.parentElement.remove();
+    // find item in to do list entries, delete it, save updated list
+    // find item in toDoEntries
+    let toDoText = e.target.parentElement.querySelector('li').textContent;
+    let entry = toDoEntries.findIndex((entry) => entry['item'] === toDoText);
+    if (entry == 0) {
+      toDoEntries.shift();
+    } else if (entry == toDoEntries.length - 1) {
+      toDoEntries.pop();
+    } else {
+      toDoEntries.splice(entry, 1);
+    }
     saveToDoList();
   }
 }
 
 // line through to-do item when checkbox is checked
 function lineThrough(e) {
+  let toDoText = e.target.parentElement.querySelector('li').textContent;
+  let entry = toDoEntries.findIndex((entry) => entry['item'] === toDoText);
   if (e.target.checked) {
     e.target.nextElementSibling.style.textDecoration = "line-through";
     e.target.nextElementSibling.style.color = "gray";
+    toDoEntries[entry]['value'] = true;
   } else {
     e.target.nextElementSibling.style.textDecoration = "none";
     e.target.nextElementSibling.style.color = "black";
+    toDoEntries[entry]['value'] = false;
   }
 
   saveToDoList();
@@ -118,14 +149,18 @@ function lineThrough(e) {
 
 // save to-do list to local storage
 function saveToDoList() {
-  localStorage.setItem("toDoList", toDoList.innerHTML);
+  localStorage.setItem("toDoList", JSON.stringify(toDoEntries));
 }
 
 // load to-do list from local storage
 function loadToDoList() {
-  const toDoListItems = localStorage.getItem("toDoList");
+  let toDoListItems = localStorage.getItem("toDoList");
   if (toDoListItems) {
-    toDoList.innerHTML = toDoListItems;
+    toDoListItems = JSON.parse(toDoListItems);
+    toDoListItems.forEach((item) => {
+      toDoEntries.push(item);
+      displayNewToDo(item['item'], item['value']);
+    });
   }
 }
 
@@ -139,6 +174,6 @@ loadToDoList();
 // add event listeners to the buttons
 toggleButton.addEventListener("click", toggleToDo);
 settingsButton.addEventListener("click", toggleSettings);
-addToDo.addEventListener("click", addToDoItem);
+toDoForm.addEventListener("submit", addToDoItem);
 toDoList.addEventListener("click", removeToDoItem);
 toDoList.addEventListener("change", lineThrough);

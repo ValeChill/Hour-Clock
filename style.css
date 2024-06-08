@@ -70,7 +70,7 @@ body {
 }
 
 /* Move generic button styling to generic button tag */
-button {
+button, input[type=submit] {
   background-color: var(--button-background-color); /* See :root */
   color: var(--button-text-color); /* See :root */
   font-size: 2rem;
