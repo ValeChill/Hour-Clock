@@ -3,6 +3,7 @@ import { themes } from "../config/config.js";
 
 // create a variable that accesses the div where the hour will be displayed
 const hourDisplay = document.querySelector(".hour");
+const clock = document.querySelector(".clock");
 // create variable for chime sound
 const hourChime = document.querySelector("#hour-chime");
 // to-do list variables
@@ -15,6 +16,9 @@ const addToDo = document.querySelector("#add-to-do");
 const settingsButton = document.querySelector(".settings-button");
 const settingsContainer = document.querySelector("#settings-container");
 const colorButtons = document.querySelectorAll(".color-button");
+const hideCheckbox = document.querySelector("#hide-everything");
+const borderCheckbox = document.querySelector("#border-toggle");
+const chimeCheckbox = document.querySelector("#chime-toggle");
 
 function getHourString(time) {
   let h = time.getHours();
@@ -144,6 +148,28 @@ function changeColor(value = themes.default) {
   });
 }
 
+// check if the window is in fullscreen mode and hide elements if it is
+function checkFullscreen() {
+  if (hideCheckbox.checked) {
+    if (!window.screenTop && !window.screenY) {
+      toggleButton.classList.add("hidden");
+      settingsButton.classList.add("hidden");
+      settingsContainer.classList.add("hidden");
+      clock.style.border = "none";
+      clock.style.backgroundColor = "transparent";
+      clock.style.boxShadow = "none";
+    } else {
+      toggleButton.classList.remove("hidden");
+      settingsButton.classList.remove("hidden");
+      clock.style.border = "3px solid var(--clock-border-color)";
+      clock.style.backgroundColor = "var(--clock-background-color)";
+      clock.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+    }
+  }
+
+  setTimeout(checkFullscreen, 1000);
+}
+
 // set the time and run the updateTime function when the page loads
 setHourDisplay(getHourString(new Date()));
 updateTime();
@@ -166,4 +192,29 @@ colorButtons.forEach((button) => {
   button.addEventListener("click", () => {
     changeColor(themes[button.id]);
   });
+});
+
+// Add the event listener to the "Hide Everything in Fullscreen" checkbox
+hideCheckbox.addEventListener("change", checkFullscreen);
+
+// Add the event listener to the "Disable Border Around Hour" checkbox
+borderCheckbox.addEventListener("change", () => {
+  if (borderCheckbox.checked) {
+    clock.style.border = "none";
+    clock.style.backgroundColor = "transparent";
+    clock.style.boxShadow = "none";
+  } else {
+    clock.style.border = "3px solid var(--clock-border-color)";
+    clock.style.backgroundColor = "var(--clock-background-color)";
+    clock.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+  }
+});
+
+// Add the event listener to the "Chime on the Hour" checkbox
+chimeCheckbox.addEventListener("change", () => {
+  if (chimeCheckbox.checked) {
+    hourChime.volume = 0.7;
+  } else {
+    hourChime.volume = 0;
+  }
 });

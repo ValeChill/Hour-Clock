@@ -159,9 +159,8 @@ h2 {
 
 /* Settings styling */
 
-.settings-section h4 {
+#settings-container {
   text-align: center;
-  margin-bottom: 1em;
 }
 
 .color-button {
@@ -173,4 +172,32 @@ h2 {
   display: flex;
   justify-content: center;
   gap: 10px;
+  margin: 10px 0;
+}
+
+#other-settings {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+#latte {
+  background-color: #4c4f69;
+}
+
+#sereneDawn {
+  background-color: #4682b4;
+}
+
+#twilightBlossom {
+  background-color: #c71585;
+}
+
+#autumnHarvest {
+  background-color: #d2691e;
+}
+
+#default {
+  background-color: #4d4d4d;
 }
