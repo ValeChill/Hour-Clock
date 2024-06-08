@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PureHour</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <!-- Removed unecessary clock-container div and replaced
@@ -14,18 +14,53 @@
       <h2 class="hour"></h2>
     </article>
     <article class="toggle-section">
-      <button class="toggle-button">+</button>
+      <button class="toggle-button">
+        <box-icon id="todo-icon"></box-icon>
+      </button>
       <section id="to-do-container" class="hidden section-container">
         <h2>To-Do List</h2>
-        <ul id="to-do-list">
-          <!-- To-do items will be added here -->
-        </ul>
-        <input id="to-do" type="text" placeholder="Add a to-do" />
-        <button id="add-to-do">Add</button>
-      </section>  
+        <ul id="to-do-list"></ul>
+        <form action="" id="to-do-form">
+          <input id="to-do" type="text" placeholder="Add a to-do" />
+          <input id="add-to-do" type="submit" value="Add" />
+        </form>
+      </section>
+    </article>
+    <article class="settings-section">
+      <button class="settings-button">
+        <box-icon id="settings-icon"></box-icon>
+      </button>
+      <section id="settings-container" class="hidden section-container">
+        <h2>Settings</h2>
+
+        <h4>Color Themes</h4>
+        <div id="colors">
+          <button class="color-button" id="latte">🌻 Latte</button>
+          <button class="color-button" id="sereneDawn">🌱 Serene Dawn</button>
+          <button class="color-button" id="twilightBlossom">
+            🌸 Twilight Blossom
+          </button>
+          <button class="color-button" id="autumnHarvest">
+            🌿 Autumun Harvest
+          </button>
+          <button class="color-button" id="default">🌈 Default</button>
+        </div>
+        <h4>Other Settings</h4>
+        <div id="other-settings">
+          <label for="chime-toggle">Disable Hourly Chime</label>
+          <input type="checkbox" id="chime-toggle" />
+          <label for="border-toggle">Disable Border Around Hour</label>
+          <input type="checkbox" id="border-toggle" />
+          <label for="hide-everything">Hide Everything in Fullscreen</label>
+          <input type="checkbox" id="hide-everything" />
+        </div>
+      </section>
     </article>
     <!-- Audio file for the chime -->
     <audio id="hour-chime" src="audio/chime.mp3"></audio>
-    <script src="script.js"></script>
+    <script type="module" src="js/script.js"></script>
+    <script type="module" src="config/config.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <!-- Import BoxIcons instead of svg -->
   </body>
 </html>

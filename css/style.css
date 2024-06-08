@@ -1,0 +1,210 @@
+:root {
+  /* Base color variables are stored here, change them in config.js */
+  --text-color: #4d4d4d; /* Soft dark grey for text */
+  --background-color: #f7f3e9; /* Soft cream background */
+  --clock-background-color: #ffffff; /* White background for clock */
+  --clock-border-color: #e0e0e0; /* Light grey border for clock */
+  --button-background-color: #4d4d4d; /* Dark grey background for buttons */
+  --button-text-color: #ffffff; /* White text for buttons */
+  --todo-background-color: #ffffff; /* White background for to-do list */
+  --todo-textbox-border-color: #e0e0e0; /* Light grey border for text box */
+  --todo-items-border-color: #e0e0e0; /* Light grey border for list items */
+  --todo-items-background-color: #ffffff; /* White background for list items */
+  --delete-button-background-color: #ffffff; /* Light grey border for delete button */
+  --delete-button-border-color: #e0e0e0; /* Light grey border for delete button */
+  --icon-color: #e0e0e0; /* Light grey color for icons */
+}
+
+/* Padding and margin on elements can have surprising results with element size,
+so it's considered good practice to set them to 0 for every element ("*" selects
+everything) */
+* {
+  padding: 0;
+  margin: 0;
+  color: var(--text-color); /* See :root */
+}
+
+box-icon {
+  fill: var(--icon-color); /* See :root */
+}
+
+/* Removed root font-size in px setting for accessibility */
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: var(--background-color); /* See :root */
+  font-family: "Trebuchet MS", sans-serif; /* Clean, modern font */
+}
+
+/* Clock styling */
+
+.clock {
+  background-color: var(--clock-background-color); /* See :root */
+  border: 3px solid var(--clock-border-color); /* See :root */
+  border-radius: 20px; /* Rounded corners */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+
+  /* Center hour in the middle of the clock */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 200px;
+}
+
+/* Large font size for hour display */
+.hour {
+  font-size: 6em;
+  font-weight: normal;
+}
+
+/* To-do list styling */
+
+.hidden {
+  display: none !important;
+}
+
+/* Move generic button styling to generic button tag */
+button, input[type=submit] {
+  background-color: var(--button-background-color); /* See :root */
+  color: var(--button-text-color); /* See :root */
+  font-size: 2rem;
+  border: none;
+  border-radius: 5px; /* Slightly rounded corners */
+  padding: 10px 20px; /* Padding inside button */
+  cursor: pointer; /* Cursor changes to pointer on hover */
+}
+
+.toggle-button {
+  position: absolute;
+  top: 90px;
+  right: 20px;
+  display: flex;
+  transform: scaleY(1.15) scaleX(1.15);
+}
+
+.settings-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  transform: scaleY(1.15) scaleX(1.15);
+}
+
+/* Move generic styling to class rather than to-do ID */
+.section-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--todo-background-color); /* See :root */
+  padding: 4rem;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+}
+
+h2 {
+  font-size: 3.5em;
+  text-align: center;
+}
+
+#to-do-list {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;
+  margin-top: 1em; /* Space between form and list */
+}
+
+#to-do {
+  font-size: 1em;
+  padding: 0.7em;
+  border: 1px solid var(--todo-textbox-border-color); /* See :root */
+  border-radius: 5px; /* Slightly rounded corners */
+  margin-right: 10px; /* Space between input and button */
+}
+
+#add-to-do {
+  font-size: 1em;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em;
+  border: 1px solid var(--todo-items-border-color); /* See :root */
+  background-color: var(--todo-items-background-color); /* See :root */
+  border-radius: 5px; /* Slightly rounded corners */
+  margin-top: 10px; /* Space between list items */
+  margin-bottom: 10px; /* Space between list item and todo textbox */
+}
+
+.delete-button {
+  font-size: 1em;
+  background-color: var(--delete-button-background-color); /* See :root */
+}
+
+.list-item input {
+  margin-right: 0.7em; /* Space between checkbox and text */
+}
+
+.list-item li {
+  flex: 1; /* Take up all available space */
+  padding-right: 10px; /* Space between text and button */
+}
+
+.list-item button {
+  border: 1px solid var(--delete-button-border-color); /* See :root */
+  border-radius: 5px; /* Slightly rounded corners */
+  padding: 5px 10px; /* Padding inside button */
+  cursor: pointer; /* Cursor changes to pointer on hover */
+}
+
+/* Settings styling */
+
+#settings-container {
+  text-align: center;
+}
+
+.color-button {
+  font-size: 1em;
+  padding: 5px 10px;
+}
+
+#colors {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+#other-settings {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+#latte {
+  background-color: #4c4f69;
+}
+
+#sereneDawn {
+  background-color: #4682b4;
+}
+
+#twilightBlossom {
+  background-color: #c71585;
+}
+
+#autumnHarvest {
+  background-color: #d2691e;
+}
+
+#default {
+  background-color: #4d4d4d;
+}
