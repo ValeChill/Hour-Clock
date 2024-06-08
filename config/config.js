@@ -79,3 +79,13 @@ export const themes = {
 
 // 🤖 CSS Assignments
 // Moved to script.js file
+
+// 🖼️ ICONS
+// https://boxicons.com/
+window.settingsIcon = "cog";
+window.todoIcon = "list-ul";
+
+document
+  .querySelector("#settings-icon")
+  .setAttribute("name", window.settingsIcon);
+document.querySelector("#todo-icon").setAttribute("name", window.todoIcon);

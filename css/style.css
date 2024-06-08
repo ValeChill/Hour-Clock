@@ -12,6 +12,7 @@
   --todo-items-background-color: #ffffff; /* White background for list items */
   --delete-button-background-color: #ffffff; /* Light grey border for delete button */
   --delete-button-border-color: #e0e0e0; /* Light grey border for delete button */
+  --icon-color: #e0e0e0; /* Light grey color for icons */
 }
 
 /* Padding and margin on elements can have surprising results with element size,
@@ -21,6 +22,10 @@ everything) */
   padding: 0;
   margin: 0;
   color: var(--text-color); /* See :root */
+}
+
+box-icon {
+  fill: var(--icon-color); /* See :root */
 }
 
 /* Removed root font-size in px setting for accessibility */
@@ -65,7 +70,7 @@ body {
 }
 
 /* Move generic button styling to generic button tag */
-button {
+button, input[type=submit] {
   background-color: var(--button-background-color); /* See :root */
   color: var(--button-text-color); /* See :root */
   font-size: 2rem;
@@ -80,6 +85,7 @@ button {
   top: 90px;
   right: 20px;
   display: flex;
+  transform: scaleY(1.15) scaleX(1.15);
 }
 
 .settings-button {
@@ -87,6 +93,7 @@ button {
   top: 20px;
   right: 20px;
   display: flex;
+  transform: scaleY(1.15) scaleX(1.15);
 }
 
 /* Move generic styling to class rather than to-do ID */
