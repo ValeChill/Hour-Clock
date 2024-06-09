@@ -6,24 +6,23 @@ const hourDisplay = document.querySelector(".hour");
 const clock = document.querySelector(".clock");
 let currentHour = new Date().getHours();
 
-// create variable for chime sound
+// create variable for sounds
 const hourChime = document.querySelector("#hour-chime");
+const deadlineAlarm = document.querySelector('#deadline-alarm');
+const warningSound = document.querySelector('#warning-sound');
 
 // to-do list variables
-const toDoButton = document.querySelector(".to-do-button");
-const toDoContainer = document.querySelector("#to-do-container");
 const toDoList = document.querySelector("#to-do-list");
 const toDo = document.querySelector("#to-do");
 const toDoForm = document.querySelector("#to-do-form");
-// all section containers
+// all section containers and buttons
 const sectionContainers = document.querySelectorAll('.section-container');
+const sectionButtons = document.querySelectorAll('.section-button');
 
 // list of to-do items and status
 let toDoEntries = [];
 
 // settings variables
-const settingsButton = document.querySelector(".settings-button");
-const settingsContainer = document.querySelector("#settings-container");
 const colorButtons = document.querySelectorAll(".color-button");
 const hideCheckbox = document.querySelector("#hide-everything");
 const borderCheckbox = document.querySelector("#border-toggle");
@@ -31,8 +30,11 @@ const chimeCheckbox = document.querySelector("#chime-toggle");
 const minutesCheckbox = document.querySelector("#show-minutes");
 
 // deadline variables
-const deadlineButton = document.querySelector(".deadline-button");
-const deadlineContainer = document.querySelector("#deadline-container");
+const deadlineForm = document.querySelector('#deadline-form');
+const deadlineTime = document.querySelector('#deadline');
+const deadlineWarning = document.querySelector('#warning-time');
+let deadline = null;
+let warning = null;
 
 function getHourString(time) {
   let h = time.getHours();
@@ -68,11 +70,37 @@ function getMinuteString(time) {
   return `${h}:${m}${midday}`;
 }
 
+function triggerTimeEvent(cTime, tTime, sound, type="") {
+  let tH = tTime.getHours();
+  let tM = tTime.getMinutes();
+  let cH = cTime.getHours();
+  let cM = cTime.getMinutes();
+
+  if ((tH === cH) && (tM === cM)) {
+    sound.play();
+    if (type == "warning") {
+      minutesCheckbox.checked = true;
+      warning = null;
+    } else {
+      deadline = null;
+    }
+  }
+}
+
 function updateTime() {
   // store the current time in a variable
   const time = new Date();
   let h = time.getHours();
+  let m = time.getMinutes();
   let timeDisplay;
+
+  if (warning) {
+    triggerTimeEvent(time, warning, warningSound, "warning")
+  }
+
+  if (deadline) {
+    triggerTimeEvent(time, deadline, deadlineAlarm);
+  }
 
   if (minutesCheckbox.checked) {
     timeDisplay = getMinuteString(time);
@@ -226,23 +254,41 @@ function changeColor(value = themes.default) {
 function checkFullscreen() {
   if (hideCheckbox.checked) {
     if (!window.screenTop && !window.screenY) {
-      toDoButton.classList.add("hidden");
-      settingsButton.classList.add("hidden");
-      deadlineButton.classList.add("hidden");
-      settingsContainer.classList.add("hidden");
+      sectionContainers.forEach((section) => {
+        section.classList.add("hidden");
+      });
+      sectionButtons.forEach((button) => {
+        button.classList.add("hidden");
+      });
       clock.style.border = "none";
       clock.style.backgroundColor = "transparent";
       clock.style.boxShadow = "none";
     } else {
-      toDoButton.classList.remove("hidden");
-      settingsButton.classList.remove("hidden");
-      deadlineButton.classList.remove("hidden");
+      sectionButtons.forEach((button) => {
+        button.classList.remove("hidden");
+      })
       clock.style.border = "3px solid var(--clock-border-color)";
       clock.style.backgroundColor = "var(--clock-background-color)";
       clock.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
     }
   }
 }
+
+function setDeadline(e) {
+  e.preventDefault();
+  // get values
+  const deadlineInput = deadlineTime.value;
+  const warningInput = deadlineWarning.value;
+
+  let deadlineHour, deadlineMinute;
+  [deadlineHour, deadlineMinute] = deadlineInput.split(":");
+
+  deadline = new Date(0, 0, 0, deadlineHour, deadlineMinute);
+  warning = new Date(deadline - (warningInput * 60000));
+
+  let section = e.target.parentElement;
+  section.classList.add('hidden');
+  }
 
 // set the time and run the updateTime function when the page loads
 setHourDisplay(getHourString(new Date()));
@@ -257,7 +303,7 @@ changeColor();
 loadToDoList();
 
 // add event listeners to section containers
-document.querySelectorAll('.section-button').forEach((button) => {
+sectionButtons.forEach((button) => {
   button.addEventListener("click", toggleSection);
 });
 
@@ -265,6 +311,7 @@ document.querySelectorAll('.section-button').forEach((button) => {
 toDoForm.addEventListener("submit", addToDoItem);
 toDoList.addEventListener("click", removeToDoItem);
 toDoList.addEventListener("change", lineThrough);
+deadlineForm.addEventListener("submit", setDeadline);
 
 // add event listeners to the color buttons
 colorButtons.forEach((button) => {

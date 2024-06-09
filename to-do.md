@@ -31,18 +31,18 @@
 
 - [ ] Add deadline timer
 - Deadline timer: user sets a time to stop working, and a warning duration (e.g. 30 minutes). At (deadline - warning), a notification sound plays and the clock switches from showing just the hour to showing the full time. At deadline, an alarm goes.
-- [ ] Add HTML to display deadline timer (pop-up menu on clicking an alarm button, perhaps? Defaults to hidden)
-  - [ ] Add JavaScript to toggle pop-up
-  - [ ] Ensure HTML includes functionality to input a deadline
-  - [ ] Add CSS styling for deadline timer display
-- [ ] Add JavaScript to set deadline
-- [ ] Select/create alarm sound
-- [ ] Add alarm sound to project files
-- [ ] Add JavaScript so that at deadline, alarm sound plays
-- [ ] Add HTML to set a warning window duration
-- [ ] Update clock to add function to change display from hour to hour and minutes
+- [x] Add HTML to display deadline timer (pop-up menu on clicking an alarm button, perhaps? Defaults to hidden)
+  - [x] Add JavaScript to toggle pop-up
+  - [x] Ensure HTML includes functionality to input a deadline
+  - [x] Add CSS styling for deadline timer display
+- [x] Add JavaScript to set deadline
+- [x] Select/create alarm sound
+- [x] Add alarm sound to project files
+- [x] Add JavaScript so that at deadline, alarm sound plays
+- [x] Add HTML to set a warning window duration
+- [x] Update clock to add function to change display from hour to hour and minutes
 - [ ] Add JavaScript so that at the start of the warning window, the clock changes to display hour and minutes
-- [ ] Make any necessary changes to deadline timer styling in CSS
+- [x] Make any necessary changes to deadline timer styling in CSS
 - [ ] Select/create warning sound
 - [ ] Add warning sound to project files
 - [ ] Add JavaScript so that when the warning time starts, the warning sound plays

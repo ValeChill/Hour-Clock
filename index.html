@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <!-- Removed unecessary clock-container div and replaced
-     clock div with article for improved semantic meaning -->
+    
     <article class="clock">
-      <!-- Set hour to h2 instead of div for improved semantic meaning -->
       <h2 class="hour"></h2>
     </article>
+
     <article class="to-do-section">
       <button class="to-do-button section-button">
         <box-icon id="to-do-icon"></box-icon>
@@ -26,6 +25,7 @@
         </form>
       </section>
     </article>
+
     <article class="settings-section">
       <button class="settings-button section-button">
         <box-icon id="settings-icon"></box-icon>
@@ -65,25 +65,31 @@
         </div>
       </section>
     </article>
+
     <article class="deadline-section">
       <button class="deadline-button section-button">
         <box-icon id="deadline-icon"></box-icon>
       </button>
       <section id="deadline-container" class="hidden section-container">
         <h2>Set a Deadline</h2>
-        <input id="deadline" type="time" />
-        <input
-          id="warning-time"
-          type="number"
-          max="60"
-          min="1"
-          placeholder="Warning time in minutes"
-        />
-        <button id="add-deadline">Add</button>
+        <form action="" id="deadline-form">
+          <input id="deadline" type="time" />
+          <input
+            id="warning-time"
+            type="number"
+            max="60"
+            min="1"
+            placeholder="Warning time in minutes"
+          />
+          <input type="submit" id="add-deadline" value="Add" />  
+        </form>
       </section>
     </article>
+
     <!-- Audio file for the chime -->
     <audio id="hour-chime" src="audio/chime.mp3"></audio>
+    <audio id="deadline-alarm" src="audio/deadline-alarm.mp3"></audio>
+    <audio src="audio/warning.mp3" id="warning-sound"></audio>
     <script type="module" src="js/script.js"></script>
     <script type="module" src="config/config.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
