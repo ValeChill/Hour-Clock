@@ -6,8 +6,9 @@ const hourDisplay = document.querySelector(".hour");
 const clock = document.querySelector(".clock");
 let currentHour = new Date().getHours();
 
-// create variable for chime sound
+// create variable for sounds
 const hourChime = document.querySelector("#hour-chime");
+const deadlineAlarm = document.querySelector('#deadline-alarm');
 
 // to-do list variables
 const toDoList = document.querySelector("#to-do-list");
@@ -31,6 +32,8 @@ const minutesCheckbox = document.querySelector("#show-minutes");
 const deadlineForm = document.querySelector('#deadline-form');
 const deadlineTime = document.querySelector('#deadline');
 const deadlineWarning = document.querySelector('#warning-time');
+let deadline = null;
+let warning = null;
 
 function getHourString(time) {
   let h = time.getHours();
@@ -70,12 +73,23 @@ function updateTime() {
   // store the current time in a variable
   const time = new Date();
   let h = time.getHours();
+  let m = time.getMinutes();
   let timeDisplay;
 
   if (minutesCheckbox.checked) {
     timeDisplay = getMinuteString(time);
   } else {
     timeDisplay = getHourString(time);
+  }
+
+  if (deadline) {
+    let dH = deadline.getHours();
+    let dM = deadline.getMinutes();
+    if (h === dH && m === dM) {
+      console.log('deadline!');
+      deadlineAlarm.play();
+      deadline = null;
+    }
   }
 
   // run hour-change events if hour has changed since last time code ran
@@ -253,10 +267,8 @@ function setDeadline(e) {
   let deadlineHour, deadlineMinute;
   [deadlineHour, deadlineMinute] = deadlineInput.split(":");
 
-  let deadline = new Date(0, 0, 0, deadlineHour, deadlineMinute);
-  let warning = new Date(deadline - (warningInput * 60000));
-
-  return [deadline, warning];
+  deadline = new Date(0, 0, 0, deadlineHour, deadlineMinute);
+  warning = new Date(deadline - (warningInput * 60000));
   }
 
 // set the time and run the updateTime function when the page loads
