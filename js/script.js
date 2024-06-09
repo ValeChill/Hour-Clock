@@ -9,6 +9,7 @@ let currentHour = new Date().getHours();
 // create variable for sounds
 const hourChime = document.querySelector("#hour-chime");
 const deadlineAlarm = document.querySelector('#deadline-alarm');
+const warningSound = document.querySelector('#warning-sound');
 
 // to-do list variables
 const toDoList = document.querySelector("#to-do-list");
@@ -69,6 +70,23 @@ function getMinuteString(time) {
   return `${h}:${m}${midday}`;
 }
 
+function triggerTimeEvent(cTime, tTime, sound, type="") {
+  let tH = tTime.getHours();
+  let tM = tTime.getMinutes();
+  let cH = cTime.getHours();
+  let cM = cTime.getMinutes();
+
+  if ((tH === cH) && (tM === cM)) {
+    sound.play();
+    if (type == "warning") {
+      minutesCheckbox.checked = true;
+      warning = null;
+    } else {
+      deadline = null;
+    }
+  }
+}
+
 function updateTime() {
   // store the current time in a variable
   const time = new Date();
@@ -76,30 +94,18 @@ function updateTime() {
   let m = time.getMinutes();
   let timeDisplay;
 
+  if (warning) {
+    triggerTimeEvent(time, warning, warningSound, "warning")
+  }
+
+  if (deadline) {
+    triggerTimeEvent(time, deadline, deadlineAlarm);
+  }
+
   if (minutesCheckbox.checked) {
     timeDisplay = getMinuteString(time);
   } else {
     timeDisplay = getHourString(time);
-  }
-
-  if (warning) {
-    let wH = warning.getHours();
-    let wM = warning.getMinutes();
-    if (h === wH && m === wM) {
-      console.log('Warning!');
-      minutesCheckbox.checked = true;
-      warning = null;
-    }
-  }
-
-  if (deadline) {
-    let dH = deadline.getHours();
-    let dM = deadline.getMinutes();
-    if (h === dH && m === dM) {
-      console.log('deadline!');
-      deadlineAlarm.play();
-      deadline = null;
-    }
   }
 
   // run hour-change events if hour has changed since last time code ran
@@ -279,6 +285,9 @@ function setDeadline(e) {
 
   deadline = new Date(0, 0, 0, deadlineHour, deadlineMinute);
   warning = new Date(deadline - (warningInput * 60000));
+
+  let section = e.target.parentElement;
+  section.classList.add('hidden');
   }
 
 // set the time and run the updateTime function when the page loads
