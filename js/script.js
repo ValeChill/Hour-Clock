@@ -15,6 +15,8 @@ const toDoContainer = document.querySelector("#to-do-container");
 const toDoList = document.querySelector("#to-do-list");
 const toDo = document.querySelector("#to-do");
 const toDoForm = document.querySelector("#to-do-form");
+// all section containers
+const sectionContainers = document.querySelectorAll('.section-container');
 
 // list of to-do items and status
 let toDoEntries = [];
@@ -101,38 +103,22 @@ function setHourDisplay(timeDisplay) {
   hourDisplay.textContent = timeDisplay;
 }
 
-// show or hide the to-do form
-function toggleToDo() {
-  toDoContainer.classList.toggle("hidden");
-  // if settings form and deadline are not hidden, hide them
-  if (settingsContainer.classList.contains("hidden") === false) {
-    settingsContainer.classList.add("hidden");
+// section visibility toggle
+function toggleSection(e) {
+  let btn = e.target;
+  if (!btn.classList.contains("section-button")) {
+    btn = btn.parentElement;
   }
-  if (deadlineContainer.classList.contains("hidden") === false) {
-    deadlineContainer.classList.add("hidden");
-  }
-}
+  let section = btn.nextElementSibling;
 
-// show or hide the settings form
-function toggleSettings() {
-  settingsContainer.classList.toggle("hidden");
-  // if to-do form and deadline are not hidden, hide them
-  if (toDoContainer.classList.contains("hidden") === false) {
-    toDoContainer.classList.add("hidden");
-  }
-  if (deadlineContainer.classList.contains("hidden") === false) {
-    deadlineContainer.classList.add("hidden");
-  }
-}
+  section.classList.toggle("hidden");
 
-function toggleDeadline() {
-  deadlineContainer.classList.toggle("hidden");
-  // if settings form and to-do form are not hidden, hide them
-  if (settingsContainer.classList.contains("hidden") === false) {
-    settingsContainer.classList.add("hidden");
-  }
-  if (toDoContainer.classList.contains("hidden") === false) {
-    toDoContainer.classList.add("hidden");
+  if (!section.classList.contains("hidden")) {
+    sectionContainers.forEach((s) => {
+      if (s != section) {
+        s.classList.add("hidden");
+      }
+    })
   }
 }
 
@@ -270,13 +256,15 @@ changeColor();
 // run the loadToDoList function when the page loads
 loadToDoList();
 
-// add event listeners to the buttons
-toDoButton.addEventListener("click", toggleToDo);
-settingsButton.addEventListener("click", toggleSettings);
+// add event listeners to section containers
+document.querySelectorAll('.section-button').forEach((button) => {
+  button.addEventListener("click", toggleSection);
+});
+
+// add event listeners to to-do buttons
 toDoForm.addEventListener("submit", addToDoItem);
 toDoList.addEventListener("click", removeToDoItem);
 toDoList.addEventListener("change", lineThrough);
-deadlineButton.addEventListener("click", toggleDeadline);
 
 // add event listeners to the color buttons
 colorButtons.forEach((button) => {
