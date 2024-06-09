@@ -82,8 +82,11 @@ function updateTime() {
   }
 
   // run hour-change events if hour has changed since last time code ran
-  currentHour != h ? onNewHour(timeDisplay) : null;
-  hourDisplay.textContent = timeDisplay;
+  hourDisplay.textContent != timeDisplay ? onNewHour(timeDisplay) : null;
+
+  // rather than have 2 separate functions calling setTimeout,
+  // move checkFulLScreen refresh here
+  checkFullscreen();
 
   // wait for one second, then run this code again
   setTimeout(updateTime, 1000);
@@ -91,8 +94,6 @@ function updateTime() {
 
 function onNewHour(timeDisplay) {
   setHourDisplay(timeDisplay);
-  currentHour = new Date().getHours();
-
   hourChime.play();
 }
 
@@ -256,13 +257,13 @@ function checkFullscreen() {
       clock.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
     }
   }
-
-  setTimeout(checkFullscreen, 1000);
 }
 
 // set the time and run the updateTime function when the page loads
 setHourDisplay(getHourString(new Date()));
 updateTime();
+// default hourChime volume
+hourChime.volume = 0.7;
 
 // run the changeColor function when the page loads so default colors are set
 changeColor();

@@ -48,6 +48,7 @@ body {
   border-radius: 20px; /* Rounded corners */
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+  cursor: default;
 
   /* Center hour in the middle of the clock */
   display: flex;
