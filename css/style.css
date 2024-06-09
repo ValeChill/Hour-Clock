@@ -220,7 +220,7 @@ h2 {
   transform: scaleY(1.15) scaleX(1.15);
 }
 
-#deadline-container {
+#deadline-container, #deadline-form {
   display: flex;
   flex-direction: column;
 }
