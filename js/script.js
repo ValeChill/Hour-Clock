@@ -33,6 +33,7 @@ const minutesCheckbox = document.querySelector("#show-minutes");
 const deadlineForm = document.querySelector('#deadline-form');
 const deadlineTime = document.querySelector('#deadline');
 const deadlineWarning = document.querySelector('#warning-time');
+const alarmOffBtn = document.querySelector('.stop-alarm-button');
 let deadline = null;
 let warning = null;
 
@@ -82,6 +83,7 @@ function triggerTimeEvent(cTime, tTime, sound, type="") {
       minutesCheckbox.checked = true;
       warning = null;
     } else {
+      alarmOffBtn.classList.remove('hidden');
       deadline = null;
     }
   }
@@ -344,3 +346,9 @@ chimeCheckbox.addEventListener("change", () => {
     hourChime.volume = 0.7;
   }
 });
+
+alarmOffBtn.addEventListener("click", () => {
+  deadlineAlarm.pause();
+  deadlineAlarm.currentTime = 0;
+  alarmOffBtn.classList.add('hidden');
+})
