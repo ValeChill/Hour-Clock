@@ -74,10 +74,8 @@ function updateTime() {
 
   if (minutesCheckbox.checked) {
     timeDisplay = getMinuteString(time);
-    clock.style.padding = "70px";
   } else {
     timeDisplay = getHourString(time);
-    clock.style.padding = "20px";
   }
 
   // run hour-change events if hour has changed since last time code ran

@@ -47,6 +47,7 @@ body {
   border: 3px solid var(--clock-border-color); /* See :root */
   border-radius: 20px; /* Rounded corners */
   padding: 20px;
+  aspect-ratio: 1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
   cursor: default;
 
@@ -54,8 +55,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
-  width: 200px;
 }
 
 /* Large font size for hour display */
