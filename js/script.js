@@ -10,8 +10,6 @@ let currentHour = new Date().getHours();
 const hourChime = document.querySelector("#hour-chime");
 
 // to-do list variables
-const toDoButton = document.querySelector(".to-do-button");
-const toDoContainer = document.querySelector("#to-do-container");
 const toDoList = document.querySelector("#to-do-list");
 const toDo = document.querySelector("#to-do");
 const toDoForm = document.querySelector("#to-do-form");
@@ -23,8 +21,6 @@ const sectionButtons = document.querySelectorAll('.section-button');
 let toDoEntries = [];
 
 // settings variables
-const settingsButton = document.querySelector(".settings-button");
-const settingsContainer = document.querySelector("#settings-container");
 const colorButtons = document.querySelectorAll(".color-button");
 const hideCheckbox = document.querySelector("#hide-everything");
 const borderCheckbox = document.querySelector("#border-toggle");
@@ -32,8 +28,9 @@ const chimeCheckbox = document.querySelector("#chime-toggle");
 const minutesCheckbox = document.querySelector("#show-minutes");
 
 // deadline variables
-const deadlineButton = document.querySelector(".deadline-button");
-const deadlineContainer = document.querySelector("#deadline-container");
+const deadlineForm = document.querySelector('#deadline-form');
+const deadlineTime = document.querySelector('#deadline');
+const deadlineWarning = document.querySelector('#warning-time');
 
 function getHourString(time) {
   let h = time.getHours();
@@ -247,6 +244,21 @@ function checkFullscreen() {
   }
 }
 
+function setDeadline(e) {
+  e.preventDefault();
+  // get values
+  const deadlineInput = deadlineTime.value;
+  const warningInput = deadlineWarning.value;
+
+  let deadlineHour, deadlineMinute;
+  [deadlineHour, deadlineMinute] = deadlineInput.split(":");
+
+  let deadline = new Date(0, 0, 0, deadlineHour, deadlineMinute);
+  let warning = new Date(deadline - (warningInput * 60000));
+
+  return [deadline, warning];
+  }
+
 // set the time and run the updateTime function when the page loads
 setHourDisplay(getHourString(new Date()));
 updateTime();
@@ -268,6 +280,7 @@ sectionButtons.forEach((button) => {
 toDoForm.addEventListener("submit", addToDoItem);
 toDoList.addEventListener("click", removeToDoItem);
 toDoList.addEventListener("change", lineThrough);
+deadlineForm.addEventListener("submit", setDeadline);
 
 // add event listeners to the color buttons
 colorButtons.forEach((button) => {
