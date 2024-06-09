@@ -15,8 +15,9 @@ const toDoContainer = document.querySelector("#to-do-container");
 const toDoList = document.querySelector("#to-do-list");
 const toDo = document.querySelector("#to-do");
 const toDoForm = document.querySelector("#to-do-form");
-// all section containers
+// all section containers and buttons
 const sectionContainers = document.querySelectorAll('.section-container');
+const sectionButtons = document.querySelectorAll('.section-button');
 
 // list of to-do items and status
 let toDoEntries = [];
@@ -226,17 +227,19 @@ function changeColor(value = themes.default) {
 function checkFullscreen() {
   if (hideCheckbox.checked) {
     if (!window.screenTop && !window.screenY) {
-      toDoButton.classList.add("hidden");
-      settingsButton.classList.add("hidden");
-      deadlineButton.classList.add("hidden");
-      settingsContainer.classList.add("hidden");
+      sectionContainers.forEach((section) => {
+        section.classList.add("hidden");
+      });
+      sectionButtons.forEach((button) => {
+        button.classList.add("hidden");
+      });
       clock.style.border = "none";
       clock.style.backgroundColor = "transparent";
       clock.style.boxShadow = "none";
     } else {
-      toDoButton.classList.remove("hidden");
-      settingsButton.classList.remove("hidden");
-      deadlineButton.classList.remove("hidden");
+      sectionButtons.forEach((button) => {
+        button.classList.remove("hidden");
+      })
       clock.style.border = "3px solid var(--clock-border-color)";
       clock.style.backgroundColor = "var(--clock-background-color)";
       clock.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
@@ -257,7 +260,7 @@ changeColor();
 loadToDoList();
 
 // add event listeners to section containers
-document.querySelectorAll('.section-button').forEach((button) => {
+sectionButtons.forEach((button) => {
   button.addEventListener("click", toggleSection);
 });
 
