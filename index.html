@@ -13,9 +13,9 @@
       <!-- Set hour to h2 instead of div for improved semantic meaning -->
       <h2 class="hour"></h2>
     </article>
-    <article class="toggle-section">
-      <button class="toggle-button">
-        <box-icon id="todo-icon"></box-icon>
+    <article class="to-do-section">
+      <button class="to-do-button">
+        <box-icon id="to-do-icon"></box-icon>
       </button>
       <section id="to-do-container" class="hidden section-container">
         <h2>To-Do List</h2>
@@ -32,7 +32,6 @@
       </button>
       <section id="settings-container" class="hidden section-container">
         <h2>Settings</h2>
-
         <h4>Color Themes</h4>
         <div id="colors">
           <button class="color-button" id="latte">🌻 Latte</button>
@@ -47,13 +46,40 @@
         </div>
         <h4>Other Settings</h4>
         <div id="other-settings">
-          <label for="chime-toggle">Disable Hourly Chime</label>
-          <input type="checkbox" id="chime-toggle" />
-          <label for="border-toggle">Disable Border Around Hour</label>
-          <input type="checkbox" id="border-toggle" />
-          <label for="hide-everything">Hide Everything in Fullscreen</label>
-          <input type="checkbox" id="hide-everything" />
+          <div class="setting">
+            <label for="chime-toggle">Disable Hourly Chime</label>
+            <input type="checkbox" id="chime-toggle" />
+          </div>
+          <div class="setting">
+            <label for="border-toggle">Disable Border Around Hour</label>
+            <input type="checkbox" id="border-toggle" />
+          </div>
+          <div class="setting">
+            <label for="hide-everything">Hide Everything in Fullscreen</label>
+            <input type="checkbox" id="hide-everything" />
+          </div>
+          <div class="setting">
+            <label for="show-minutes">Show Minutes</label>
+            <input type="checkbox" id="show-minutes" />
+          </div>
         </div>
+      </section>
+    </article>
+    <article class="deadline-section">
+      <button class="deadline-button">
+        <box-icon id="deadline-icon"></box-icon>
+      </button>
+      <section id="deadline-container" class="hidden section-container">
+        <h2>Set a Deadline</h2>
+        <input id="deadline" type="time" />
+        <input
+          id="warning-time"
+          type="number"
+          max="60"
+          min="1"
+          placeholder="Warning time in minutes"
+        />
+        <button id="add-deadline">Add</button>
       </section>
     </article>
     <!-- Audio file for the chime -->
