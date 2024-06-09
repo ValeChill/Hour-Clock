@@ -8,7 +8,6 @@ let currentHour = new Date().getHours();
 
 // create variable for chime sound
 const hourChime = document.querySelector("#hour-chime");
-hourChime.volume = 0.5;
 
 // to-do list variables
 const toDoButton = document.querySelector(".to-do-button");
@@ -82,7 +81,8 @@ function updateTime() {
   }
 
   // run hour-change events if hour has changed since last time code ran
-  hourDisplay.textContent != timeDisplay ? onNewHour(timeDisplay) : null;
+  currentHour != h ? onNewHour(timeDisplay) : null;
+  hourDisplay.textContent = timeDisplay;
 
   // rather than have 2 separate functions calling setTimeout,
   // move checkFulLScreen refresh here
@@ -94,6 +94,7 @@ function updateTime() {
 
 function onNewHour(timeDisplay) {
   setHourDisplay(timeDisplay);
+  currentHour = new Date().getHours();
   hourChime.play();
 }
 
@@ -307,6 +308,6 @@ chimeCheckbox.addEventListener("change", () => {
   if (chimeCheckbox.checked) {
     hourChime.volume = 0;
   } else {
-    hourChime.volume = 0.5;
+    hourChime.volume = 0.7;
   }
 });
