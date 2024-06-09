@@ -82,6 +82,16 @@ function updateTime() {
     timeDisplay = getHourString(time);
   }
 
+  if (warning) {
+    let wH = warning.getHours();
+    let wM = warning.getMinutes();
+    if (h === wH && m === wM) {
+      console.log('Warning!');
+      minutesCheckbox.checked = true;
+      warning = null;
+    }
+  }
+
   if (deadline) {
     let dH = deadline.getHours();
     let dM = deadline.getMinutes();
