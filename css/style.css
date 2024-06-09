@@ -70,7 +70,8 @@ body {
 }
 
 /* Move generic button styling to generic button tag */
-button, input[type=submit] {
+button,
+input[type="submit"] {
   background-color: var(--button-background-color); /* See :root */
   color: var(--button-text-color); /* See :root */
   font-size: 2rem;
@@ -80,7 +81,7 @@ button, input[type=submit] {
   cursor: pointer; /* Cursor changes to pointer on hover */
 }
 
-.toggle-button {
+.to-do-button {
   position: absolute;
   top: 90px;
   right: 20px;
@@ -184,7 +185,7 @@ h2 {
 
 #other-settings {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 10px;
   margin: 10px 0;
 }
@@ -207,4 +208,46 @@ h2 {
 
 #default {
   background-color: #4d4d4d;
+}
+
+/* Deadline styling */
+
+.deadline-button {
+  position: absolute;
+  top: 160px;
+  right: 20px;
+  display: flex;
+  transform: scaleY(1.15) scaleX(1.15);
+}
+
+#deadline-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#deadline-container h2 {
+  font-size: 2.5em;
+  text-align: center;
+}
+
+#deadline {
+  font-size: 1em;
+  padding: 0.7em;
+  border: 1px solid var(--todo-textbox-border-color);
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+}
+
+#warning-time {
+  font-size: 1em;
+  padding: 0.7em;
+  border: 1px solid var(--todo-textbox-border-color);
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+}
+
+#add-deadline {
+  font-size: 1em;
 }

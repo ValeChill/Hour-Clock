@@ -4,10 +4,14 @@ import { themes } from "../config/config.js";
 // create a variable that accesses the div where the hour will be displayed
 const hourDisplay = document.querySelector(".hour");
 const clock = document.querySelector(".clock");
+let currentHour = new Date().getHours();
+
 // create variable for chime sound
 const hourChime = document.querySelector("#hour-chime");
+hourChime.volume = 0.5;
+
 // to-do list variables
-const toggleButton = document.querySelector(".toggle-button");
+const toDoButton = document.querySelector(".to-do-button");
 const toDoContainer = document.querySelector("#to-do-container");
 const toDoList = document.querySelector("#to-do-list");
 const toDo = document.querySelector("#to-do");
@@ -23,6 +27,11 @@ const colorButtons = document.querySelectorAll(".color-button");
 const hideCheckbox = document.querySelector("#hide-everything");
 const borderCheckbox = document.querySelector("#border-toggle");
 const chimeCheckbox = document.querySelector("#chime-toggle");
+const minutesCheckbox = document.querySelector("#show-minutes");
+
+// deadline variables
+const deadlineButton = document.querySelector(".deadline-button");
+const deadlineContainer = document.querySelector("#deadline-container");
 
 function getHourString(time) {
   let h = time.getHours();
@@ -40,14 +49,41 @@ function getHourString(time) {
   return `${h}${midday}`;
 }
 
+// get full time string
+function getMinuteString(time) {
+  let h = time.getHours();
+  let m = time.getMinutes();
+  let midday = "am";
+  if (h >= 12) {
+    h = h === 12 ? h : h - 12;
+    midday = "pm";
+  } else if (h === 0) {
+    h = 12;
+  }
+
+  // add leading zero to minutes if they are less than 10
+  m = m < 10 ? "0" + m : m;
+
+  return `${h}:${m}${midday}`;
+}
+
 function updateTime() {
   // store the current time in a variable
   const time = new Date();
+  let h = time.getHours();
+  let timeDisplay;
 
-  let timeDisplay = getHourString(time);
+  if (minutesCheckbox.checked) {
+    timeDisplay = getMinuteString(time);
+    clock.style.padding = "70px";
+  } else {
+    timeDisplay = getHourString(time);
+    clock.style.padding = "20px";
+  }
 
   // run hour-change events if hour has changed since last time code ran
-  hourDisplay.textContent != timeDisplay ? onNewHour(timeDisplay) : null;
+  currentHour != h ? onNewHour(timeDisplay) : null;
+  hourDisplay.textContent = timeDisplay;
 
   // wait for one second, then run this code again
   setTimeout(updateTime, 1000);
@@ -55,8 +91,8 @@ function updateTime() {
 
 function onNewHour(timeDisplay) {
   setHourDisplay(timeDisplay);
-  // hourChime volume reduced so it's less disruptive to user workflow
-  hourChime.volume = 0.7;
+  currentHour = new Date().getHours();
+
   hourChime.play();
 }
 
@@ -68,16 +104,33 @@ function setHourDisplay(timeDisplay) {
 // show or hide the to-do form
 function toggleToDo() {
   toDoContainer.classList.toggle("hidden");
-  // if settings form is not hidden, hide it
+  // if settings form and deadline are not hidden, hide them
   if (settingsContainer.classList.contains("hidden") === false) {
     settingsContainer.classList.add("hidden");
+  }
+  if (deadlineContainer.classList.contains("hidden") === false) {
+    deadlineContainer.classList.add("hidden");
   }
 }
 
 // show or hide the settings form
 function toggleSettings() {
   settingsContainer.classList.toggle("hidden");
-  // if to-do form is not hidden, hide it
+  // if to-do form and deadline are not hidden, hide them
+  if (toDoContainer.classList.contains("hidden") === false) {
+    toDoContainer.classList.add("hidden");
+  }
+  if (deadlineContainer.classList.contains("hidden") === false) {
+    deadlineContainer.classList.add("hidden");
+  }
+}
+
+function toggleDeadline() {
+  deadlineContainer.classList.toggle("hidden");
+  // if settings form and to-do form are not hidden, hide them
+  if (settingsContainer.classList.contains("hidden") === false) {
+    settingsContainer.classList.add("hidden");
+  }
   if (toDoContainer.classList.contains("hidden") === false) {
     toDoContainer.classList.add("hidden");
   }
@@ -89,13 +142,13 @@ function addToDoItem(event) {
   const toDoItem = toDo.value;
   if (toDoItem) {
     displayNewToDo(toDoItem);
-    toDoEntries.push({item: toDoItem, value: false});
+    toDoEntries.push({ item: toDoItem, value: false });
     toDo.value = "";
     saveToDoList();
   }
 }
 
-function displayNewToDo(text, complete=false) {
+function displayNewToDo(text, complete = false) {
   const listDiv = document.createElement("div");
   const deleteButton = document.createElement("button");
   const checkbox = document.createElement("input");
@@ -106,7 +159,7 @@ function displayNewToDo(text, complete=false) {
   deleteButton.classList.add("delete-button");
   checkbox.type = "checkbox";
 
-  if (complete==true) {
+  if (complete == true) {
     checkbox.checked = true;
     li.style.textDecoration = "line-through";
     li.style.color = "gray";
@@ -125,8 +178,8 @@ function removeToDoItem(e) {
     e.target.parentElement.remove();
     // find item in to do list entries, delete it, save updated list
     // find item in toDoEntries
-    let toDoText = e.target.parentElement.querySelector('li').textContent;
-    let entry = toDoEntries.findIndex((entry) => entry['item'] === toDoText);
+    let toDoText = e.target.parentElement.querySelector("li").textContent;
+    let entry = toDoEntries.findIndex((entry) => entry["item"] === toDoText);
     if (entry == 0) {
       toDoEntries.shift();
     } else if (entry == toDoEntries.length - 1) {
@@ -140,16 +193,16 @@ function removeToDoItem(e) {
 
 // line through to-do item when checkbox is checked
 function lineThrough(e) {
-  let toDoText = e.target.parentElement.querySelector('li').textContent;
-  let entry = toDoEntries.findIndex((entry) => entry['item'] === toDoText);
+  let toDoText = e.target.parentElement.querySelector("li").textContent;
+  let entry = toDoEntries.findIndex((entry) => entry["item"] === toDoText);
   if (e.target.checked) {
     e.target.nextElementSibling.style.textDecoration = "line-through";
     e.target.nextElementSibling.style.color = "gray";
-    toDoEntries[entry]['value'] = true;
+    toDoEntries[entry]["value"] = true;
   } else {
     e.target.nextElementSibling.style.textDecoration = "none";
     e.target.nextElementSibling.style.color = "black";
-    toDoEntries[entry]['value'] = false;
+    toDoEntries[entry]["value"] = false;
   }
 
   saveToDoList();
@@ -167,7 +220,7 @@ function loadToDoList() {
     toDoListItems = JSON.parse(toDoListItems);
     toDoListItems.forEach((item) => {
       toDoEntries.push(item);
-      displayNewToDo(item['item'], item['value']);
+      displayNewToDo(item["item"], item["value"]);
     });
   }
 }
@@ -187,15 +240,17 @@ function changeColor(value = themes.default) {
 function checkFullscreen() {
   if (hideCheckbox.checked) {
     if (!window.screenTop && !window.screenY) {
-      toggleButton.classList.add("hidden");
+      toDoButton.classList.add("hidden");
       settingsButton.classList.add("hidden");
+      deadlineButton.classList.add("hidden");
       settingsContainer.classList.add("hidden");
       clock.style.border = "none";
       clock.style.backgroundColor = "transparent";
       clock.style.boxShadow = "none";
     } else {
-      toggleButton.classList.remove("hidden");
+      toDoButton.classList.remove("hidden");
       settingsButton.classList.remove("hidden");
+      deadlineButton.classList.remove("hidden");
       clock.style.border = "3px solid var(--clock-border-color)";
       clock.style.backgroundColor = "var(--clock-background-color)";
       clock.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
@@ -216,11 +271,12 @@ changeColor();
 loadToDoList();
 
 // add event listeners to the buttons
-toggleButton.addEventListener("click", toggleToDo);
+toDoButton.addEventListener("click", toggleToDo);
 settingsButton.addEventListener("click", toggleSettings);
 toDoForm.addEventListener("submit", addToDoItem);
 toDoList.addEventListener("click", removeToDoItem);
 toDoList.addEventListener("change", lineThrough);
+deadlineButton.addEventListener("click", toggleDeadline);
 
 // add event listeners to the color buttons
 colorButtons.forEach((button) => {
@@ -248,8 +304,8 @@ borderCheckbox.addEventListener("change", () => {
 // Add the event listener to the "Chime on the Hour" checkbox
 chimeCheckbox.addEventListener("change", () => {
   if (chimeCheckbox.checked) {
-    hourChime.volume = 0.7;
-  } else {
     hourChime.volume = 0;
+  } else {
+    hourChime.volume = 0.5;
   }
 });

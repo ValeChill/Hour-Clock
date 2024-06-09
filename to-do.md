@@ -62,10 +62,10 @@
 
 ## Optional minute visibility
 
-- [ ] Add minute visibility toggle to settings
-- [ ] Add HTML to settings menu for toggle to view minutes instead of just hour
-- [ ] Add styling for toggle
-- [ ] Add JavaScript to toggle minute display
+- [x] Add minute visibility toggle to settings
+- [x] Add HTML to settings menu for toggle to view minutes instead of just hour
+- [x] Add styling for toggle
+- [x] Add JavaScript to toggle minute display
 - Note: already able to add minute display from deadline timer; can reuse same functionality
 - Will need to ensure the settings toggle doesn't undesirably overwrite a setting from the deadline timer
 - If minutes have been turned on and the warning time begins, minutes should remain visible.

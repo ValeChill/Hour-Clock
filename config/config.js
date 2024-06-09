@@ -84,8 +84,12 @@ export const themes = {
 // https://boxicons.com/
 window.settingsIcon = "cog";
 window.todoIcon = "list-ul";
+window.deadlineIcon = "alarm-exclamation";
 
 document
   .querySelector("#settings-icon")
   .setAttribute("name", window.settingsIcon);
-document.querySelector("#todo-icon").setAttribute("name", window.todoIcon);
+document.querySelector("#to-do-icon").setAttribute("name", window.todoIcon);
+document
+  .querySelector("#deadline-icon")
+  .setAttribute("name", window.deadlineIcon);
