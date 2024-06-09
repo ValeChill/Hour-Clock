@@ -81,7 +81,8 @@ function triggerTimeEvent(cTime, tTime, sound, type="") {
     if (type == "warning") {
       minutesCheckbox.checked = true;
       warning = null;
-    } else {
+    } else if (type === "deadline") {
+      deadlineForm.lastElementChild.value = "Add";
       deadline = null;
     }
   }
@@ -99,7 +100,7 @@ function updateTime() {
   }
 
   if (deadline) {
-    triggerTimeEvent(time, deadline, deadlineAlarm);
+    triggerTimeEvent(time, deadline, deadlineAlarm, "deadline");
   }
 
   if (minutesCheckbox.checked) {
@@ -288,6 +289,7 @@ function setDeadline(e) {
 
   let section = e.target.parentElement;
   section.classList.add('hidden');
+  e.target.lastElementChild.value = "Update";
   }
 
 // set the time and run the updateTime function when the page loads
