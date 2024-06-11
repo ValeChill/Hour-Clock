@@ -85,6 +85,7 @@ export const themes = {
 window.settingsIcon = "cog";
 window.todoIcon = "list-ul";
 window.deadlineIcon = "alarm-exclamation";
+window.alarmOffIcon = "alarm-off";
 
 document
   .querySelector("#settings-icon")
@@ -93,3 +94,6 @@ document.querySelector("#to-do-icon").setAttribute("name", window.todoIcon);
 document
   .querySelector("#deadline-icon")
   .setAttribute("name", window.deadlineIcon);
+document
+  .querySelector("#alarm-off")
+  .setAttribute("name", window.alarmOffIcon)
