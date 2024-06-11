@@ -251,3 +251,12 @@ h2 {
 #add-deadline {
   font-size: 1em;
 }
+
+.stop-alarm-button {
+  position: absolute;
+  top: 230px;
+  right: 20px;
+  display: flex;
+  transform: scaleY(1.15) scaleX(1.15);
+  /* needs a stand-out color */
+}
