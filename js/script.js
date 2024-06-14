@@ -1,5 +1,6 @@
 // import colors
 import { themes } from "../config/config.js";
+import { playlists } from "../config/config.js";
 
 // create a variable that accesses the div where the hour will be displayed
 const hourDisplay = document.querySelector(".hour");
@@ -346,3 +347,17 @@ chimeCheckbox.addEventListener("change", () => {
     hourChime.volume = 0.7;
   }
 });
+
+
+/* export const playlists = {
+  "lofi": {
+    "name": "Lofi Hip Hop",
+    "src": "https://www.youtube.com/watch?v=vr9dLvJs7VE&list=RDjfKfPfyJRdk&start_radio=1",
+  },
+  "jazz": {
+    "name": "Jazz",
+    "src": "https://www.youtube.com/playlist?list=PLrF4RfjXKdWCwm5kXb3uVv8k0rjEJ4y3j",
+  }
+}; */
+
+// window.YoutubeAPIKey = "AIzaSyBk4ZBbzu54DsDHd6cLRbT6Gpv9_m3DKCk";

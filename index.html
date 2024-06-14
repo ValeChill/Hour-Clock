@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PureHour</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="widgets/music/app.css" />
   </head>
   <body>
+
+    
+    <div id="iframe-video"></div>
     
     <article class="clock">
       <h2 class="hour"></h2>
@@ -86,13 +90,63 @@
       </section>
     </article>
 
+    <article class="music-section" style="z-index: 1;"> <!-- z-index: 1; to make the timeline bar not go over the controls -->
+      <button class="music-button section-button">
+        <box-icon id="music-icon"></box-icon>
+      </button>
+      <section id="music-container" class="hidden section-container">
+        <h2>Music Playback</h2>
+        <h1>Premade Playlists</h1>
+        <select id="music-list">
+          <option value="">Select a playlist</option>
+        </select>
+        <h1>Youtube API Key</h1>
+        <input type="text" id="apikey" placeholder="Enter your Youtube API Key" />
+      </section>
+    </article>
+
+    <div class="music-controls">
+      <div class="music-container">
+        <div class="song">
+          <div class='albumart'></div>
+          <div class="musicinfo">
+            <p class="title">Song Name</p>
+            <p class="artist">Song Artist</p>
+          </div>
+        </div>
+        <div class="soundwaves">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+      <input type="range" min="0" max="100" value="50" class="slider" id="track">
+      <div class="volume-control">
+        <input type="range" min="0" max="100" value="100" class="slider" id="vertical">
+        <box-icon name='volume-full' id='volume-icon'></box-icon>
+      </div>
+      <div class="music-dock">
+        <button class="bw">
+          <box-icon name='rewind' id="bwIcon"></box-icon>
+        </button>
+        <button class="play">
+          <box-icon name='pause' id="playIcon"></box-icon>
+        </button>
+        <button class="fw">
+          <box-icon name='fast-forward' id="fwIcon"></box-icon>
+        </button>
+      </div>
+    </div>
+
     <!-- Audio file for the chime -->
     <audio id="hour-chime" src="audio/chime.mp3"></audio>
     <audio id="deadline-alarm" src="audio/deadline-alarm.mp3"></audio>
     <audio src="audio/warning.mp3" id="warning-sound"></audio>
     <script type="module" src="js/script.js"></script>
+    <script type="module" src="widgets/music/app.js"></script>
     <script type="module" src="config/config.js"></script>
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <!-- Import BoxIcons instead of svg -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script> <!-- Import BoxIcons instead of svg -->
   </body>
 </html>

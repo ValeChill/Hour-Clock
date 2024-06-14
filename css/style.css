@@ -31,8 +31,10 @@ box-icon {
 /* Removed root font-size in px setting for accessibility */
 
 body {
+  overflow: hidden; /* Prevent scrolling for music stuff */
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100vh;
   margin: 0;
