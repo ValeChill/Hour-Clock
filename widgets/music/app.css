@@ -1,0 +1,336 @@
+/* General Styles */
+
+.music-button {
+    position: absolute;
+    top: 230px;
+    right: 20px;
+    display: flex;
+    transform: scaleY(1.15) scaleX(1.15);
+}
+
+#music-container, #music-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#music-container h2 {
+    font-size: 2.5em;
+    text-align: center;
+}
+
+#music-container h1 {
+    font-size: 1.25em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#music-list {
+    list-style-type: none;
+    height: 35px;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#iframe-video {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+/* Music Container Styles */
+
+.music-container {
+    transform: translateY(100vh);
+    display: flex;
+    align-items: center;
+    align-self: center;
+    height: 100px;
+    padding: 0 15px 0 15px;
+    border-radius: 6px;
+    background-color: var(--clock-background-color);
+    transition: background-color 0.3s ease;
+    border: 3px solid var(--clock-border-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.music-container:hover {
+    background-color: var(--clock-border-color);
+}
+
+.music-container.tween {
+    animation: slideUp 1.55s ease-in-out forwards;
+}
+
+/* Music Dock Styles */
+
+.music-dock {
+    transform: translateY(100vh);
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Add this line */
+    align-self: center;
+    height: 55px;
+    padding: 0 15px 0 15px;
+    border-radius: 6px;
+    background-color: var(--clock-background-color);
+    transition: background-color 0.3s ease;
+    border: 3px solid var(--clock-border-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.music-dock:hover {
+    background-color: var(--clock-border-color);
+}
+
+.music-dock.tween {
+    animation: slideUpDock 1.55s ease-in-out forwards;
+}
+
+.fw, .bw, .play {
+    margin: auto;
+    background-color: transparent;
+}
+
+#fwIcon, #bwIcon, #playIcon {
+    fill: var(--text-color);
+}
+
+#fwIcon:hover, #bwIcon:hover, #playIcon:hover {
+    fill: var(--todo-items-border-color);
+    filter: brightness(80%);
+}
+
+/* Track Styles */
+
+#track {
+    transform: translateY(100vh);
+}
+
+#track.tween {
+    animation: slideUp 1.55s ease-in-out forwards;
+}
+
+/* Vertical Styles */
+
+#vertical {
+    transform: translateX(400vh);
+    transform-origin: left top;
+    direction: rtl;
+    width: 75px;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--clock-background-color);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+#vertical.tween {
+    animation: slideUpVert 1.55s ease-in-out forwards;
+}
+
+/* Volume Control Styles */
+
+.volume-control {
+    position: relative;
+}
+
+#volume-icon {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 17px); /* Bad way of doing it */
+    top: calc(100% - 35px); /* ^^^ */
+    transform: translateY(100vh);
+    fill: var(--text-color);
+}
+
+#volume-icon.tween {
+    animation: slideUp 1.55s ease-in-out forwards;
+}
+
+/* Soundwaves Styles */
+
+.soundwaves {
+    height: 40px;
+    width: auto;
+    display: flex;
+    align-items: flex-end;
+    margin-right: 15px;
+}
+
+.bar {
+    width: 6px;
+    height: 100%;
+    background: var(--text-color);
+    border-radius: 4px;
+    margin: 0 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: equalizerPause 1s ease-in-out infinite;
+    animation-fill-mode: forwards;
+}
+
+.bar.playing {
+    animation: equalizer 1s ease-in-out infinite;
+    animation-fill-mode: forwards;
+}
+
+.bar:nth-child(1) { 
+    animation-duration: 1.9s;
+}
+
+.bar:nth-child(2) { 
+    animation-duration: 2.0s;
+}
+
+.bar:nth-child(3) { 
+    animation-duration: 1.7s;
+}
+
+.bar:nth-child(4) { 
+    animation-duration: 2.1s;
+}
+
+/* Song Styles */
+
+.song {
+    display: flex;
+    align-items: center;
+    width: 300px;
+}
+
+.albumart {
+    background-image: url('https://i.pinimg.com/originals/f1/91/a4/f191a4786289ade562884722ef784cff.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80px;
+    width: 80px;
+    margin-right: 15px;
+    border-radius: 4px;
+}
+
+.title { 
+    color: var(--text-color);
+    font-size: 1.5rem;
+    padding: 0; margin: 2px 0 6px;
+}
+
+.artist {
+    font-size: 1.2rem;
+    padding: 0; margin: 2px 0;
+    color: var(--todo-border-color);
+}
+
+.artist a {
+    text-decoration: none;
+}
+
+.artist a:hover {
+    text-decoration: underline;
+}
+
+/* Text Input Styles */
+
+input[type=text] {
+    scale: 1.15;
+}
+
+/* Range Input Styles */
+
+input[type=range] {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--clock-background-color);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--text-color);
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input[type=range]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--text-color);
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation Styles */
+
+@keyframes slideUpVert {
+    from {
+      transform: rotate(90deg) translateX(200vh) translateY(-42.5vh);
+    }
+    to {
+      transform: rotate(90deg) translateX(4vh) translateY(-42.5vh);
+    }
+}
+
+@keyframes slideUpDock {
+    from {
+      transform: translateY(100vh) ;
+    }
+    to {
+      transform: translateY(250%);
+    }
+}
+
+@keyframes slideUp {
+    from {
+      transform: translateY(100vh) ;
+    }
+    to {
+      transform: translateY(150%);
+    }
+}
+
+
+@keyframes equalizerPause {
+    0%, 100% {
+        height: 15%;
+    }
+}
+
+@keyframes equalizer {
+    0%, 100% {
+      height: 30%;
+    }
+    10%, 90% {
+      height: 10%;
+    }
+    20%, 80% {
+      height: 50%;
+    }
+    30%, 70% {
+      height: 60%;
+    }
+    40%, 60% {
+      height: 70%;
+    }
+    50% {
+      height: 80%;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}

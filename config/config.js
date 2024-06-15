@@ -77,19 +77,34 @@ export const themes = {
   },
 };
 
-// 🤖 CSS Assignments
-// Moved to script.js file
+export const playlists = {
+  "lofi": {
+    "name": "Lofi Hip Hop",
+    "src": "PLzByH-h3aV9v1W7X5Ty1HOSaG4vPNBcPg",
+  },
+  "anime": {
+    "name": "Anime Openings",
+    "src": "PLjNlQ2vXx1xbt30X8TcUfNzw_akVISXEu",
+  },
+  "jazz": {
+    "name": "Jazz",
+    "src": "PL0PwxJm2JWCRdZ41OofKKAVGTbuJ8lbnd",
+  },
+};
 
 // 🖼️ ICONS
 // https://boxicons.com/
 window.settingsIcon = "cog";
 window.todoIcon = "list-ul";
 window.deadlineIcon = "alarm-exclamation";
+window.musicIcon = "music";
+window.playIcon = "play";
+window.pauseIcon = "pause";
+window.skipIcon = "skip-next";
 
-document
-  .querySelector("#settings-icon")
-  .setAttribute("name", window.settingsIcon);
+// Why format them weirdly?
+
+document.querySelector("#settings-icon").setAttribute("name", window.settingsIcon);
 document.querySelector("#to-do-icon").setAttribute("name", window.todoIcon);
-document
-  .querySelector("#deadline-icon")
-  .setAttribute("name", window.deadlineIcon);
+document.querySelector("#music-icon").setAttribute("name", window.musicIcon);
+document.querySelector("#deadline-icon").setAttribute("name", window.deadlineIcon);

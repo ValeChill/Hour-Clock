@@ -1,5 +1,6 @@
 // import colors
 import { themes } from "../config/config.js";
+import { playlists } from "../config/config.js";
 
 // create a variable that accesses the div where the hour will be displayed
 const hourDisplay = document.querySelector(".hour");
