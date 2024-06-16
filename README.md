@@ -40,6 +40,12 @@ Welcome to **PureHour**, a sleek and customizable productivity tool designed to 
 - **User Preference**: Customize your clock display according to your preference for minute visibility.
 - **Seamless Integration**: Minute visibility settings seamlessly integrate with other features such as the deadline timer.
 
+### Music Player Widget 🎵
+
+- **Variety of Playlists**: Choose from a variety of premade playlists to suit your mood and enhance your productivity.
+- **Personalized Experience**: Load your favorite YouTube playlists directly into PureHour for a personalized experience.
+- **Seamless Playback**: Enjoy uninterrupted music playback while you work on your tasks.
+
 ### Soundscape Feature 🎶 (Planned)
 
 - **Ambient Sounds**: Enhance your productivity environment with optional soundscape features.

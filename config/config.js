@@ -78,33 +78,34 @@ export const themes = {
 };
 
 export const playlists = {
-  "lofi": {
-    "name": "Lofi Hip Hop",
-    "src": "PLzByH-h3aV9v1W7X5Ty1HOSaG4vPNBcPg",
+  lofi: {
+    name: "Lofi Hip Hop",
+    src: "PLzByH-h3aV9v1W7X5Ty1HOSaG4vPNBcPg",
   },
-  "anime": {
-    "name": "Anime Openings",
-    "src": "PLjNlQ2vXx1xbt30X8TcUfNzw_akVISXEu",
+  anime: {
+    name: "Anime Openings",
+    src: "PLjNlQ2vXx1xbt30X8TcUfNzw_akVISXEu",
   },
-  "jazz": {
-    "name": "Jazz",
-    "src": "PL0PwxJm2JWCRdZ41OofKKAVGTbuJ8lbnd",
+  jazz: {
+    name: "Jazz",
+    src: "PL0PwxJm2JWCRdZ41OofKKAVGTbuJ8lbnd",
   },
 };
 
 // 🖼️ ICONS
 // https://boxicons.com/
-window.settingsIcon = "cog";
-window.todoIcon = "list-ul";
-window.deadlineIcon = "alarm-exclamation";
-window.musicIcon = "music";
-window.playIcon = "play";
-window.pauseIcon = "pause";
-window.skipIcon = "skip-next";
+
+export const icons = {
+  "settings-icon": "cog",
+  "to-do-icon": "list-ul",
+  "deadline-icon": "alarm-exclamation",
+  "music-icon": "music",
+  /* this icons not used i think??
+  "play-icon": "play",
+  "pause-icon": "pause",
+  "skip-icon": "skip-next", */
+};
 
 // Why format them weirdly?
 
-document.querySelector("#settings-icon").setAttribute("name", window.settingsIcon);
-document.querySelector("#to-do-icon").setAttribute("name", window.todoIcon);
-document.querySelector("#music-icon").setAttribute("name", window.musicIcon);
-document.querySelector("#deadline-icon").setAttribute("name", window.deadlineIcon);
+// Prettier did it not me 😅
