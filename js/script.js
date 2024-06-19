@@ -1,5 +1,5 @@
 // import colors
-import { themes } from "../config/config.js";
+import { themes, icons } from "../config/config.js";
 
 // create a variable that accesses the div where the hour will be displayed
 const hourDisplay = document.querySelector(".hour");
@@ -8,16 +8,16 @@ let currentHour = new Date().getHours();
 
 // create variable for sounds
 const hourChime = document.querySelector("#hour-chime");
-const deadlineAlarm = document.querySelector('#deadline-alarm');
-const warningSound = document.querySelector('#warning-sound');
+const deadlineAlarm = document.querySelector("#deadline-alarm");
+const warningSound = document.querySelector("#warning-sound");
 
 // to-do list variables
 const toDoList = document.querySelector("#to-do-list");
 const toDo = document.querySelector("#to-do");
 const toDoForm = document.querySelector("#to-do-form");
 // all section containers and buttons
-const sectionContainers = document.querySelectorAll('.section-container');
-const sectionButtons = document.querySelectorAll('.section-button');
+const sectionContainers = document.querySelectorAll(".section-container");
+const sectionButtons = document.querySelectorAll(".section-button");
 
 // list of to-do items and status
 let toDoEntries = [];
@@ -30,12 +30,15 @@ const chimeCheckbox = document.querySelector("#chime-toggle");
 const minutesCheckbox = document.querySelector("#show-minutes");
 
 // deadline variables
-const deadlineForm = document.querySelector('#deadline-form');
-const deadlineTime = document.querySelector('#deadline');
-const deadlineWarning = document.querySelector('#warning-time');
-const alarmOffBtn = document.querySelector('.stop-alarm-button');
+const deadlineForm = document.querySelector("#deadline-form");
+const deadlineTime = document.querySelector("#deadline");
+const deadlineWarning = document.querySelector("#warning-time");
+const alarmOffBtn = document.querySelector(".stop-alarm-button");
 let deadline = null;
 let warning = null;
+
+// music player variables
+const musicPlayer = document.querySelector(".music-controls");
 
 function getHourString(time) {
   let h = time.getHours();
@@ -71,19 +74,19 @@ function getMinuteString(time) {
   return `${h}:${m}${midday}`;
 }
 
-function triggerTimeEvent(cTime, tTime, sound, type="") {
+function triggerTimeEvent(cTime, tTime, sound, type = "") {
   let tH = tTime.getHours();
   let tM = tTime.getMinutes();
   let cH = cTime.getHours();
   let cM = cTime.getMinutes();
 
-  if ((tH === cH) && (tM === cM)) {
+  if (tH === cH && tM === cM) {
     sound.play();
     if (type == "warning") {
       minutesCheckbox.checked = true;
       warning = null;
     } else if (type === "deadline") {
-      alarmOffBtn.classList.remove('hidden');
+      alarmOffBtn.classList.remove("hidden");
       deadlineForm.lastElementChild.value = "Add";
       deadline = null;
     }
@@ -98,7 +101,7 @@ function updateTime() {
   let timeDisplay;
 
   if (warning) {
-    triggerTimeEvent(time, warning, warningSound, "warning")
+    triggerTimeEvent(time, warning, warningSound, "warning");
   }
 
   if (deadline) {
@@ -149,7 +152,7 @@ function toggleSection(e) {
       if (s != section) {
         s.classList.add("hidden");
       }
-    })
+    });
   }
 }
 
@@ -253,6 +256,16 @@ function changeColor(value = themes.default) {
   });
 }
 
+// set icons for the icons in the settings section
+function setIcons() {
+  Object.keys(icons).forEach((iconKey) => {
+    const element = document.querySelector(`#${iconKey}`);
+    if (element) {
+      element.setAttribute("name", icons[iconKey]);
+    }
+  });
+}
+
 // check if the window is in fullscreen mode and hide elements if it is
 function checkFullscreen() {
   if (hideCheckbox.checked) {
@@ -263,13 +276,15 @@ function checkFullscreen() {
       sectionButtons.forEach((button) => {
         button.classList.add("hidden");
       });
+      musicPlayer.classList.add("hidden");
       clock.style.border = "none";
       clock.style.backgroundColor = "transparent";
       clock.style.boxShadow = "none";
     } else {
       sectionButtons.forEach((button) => {
         button.classList.remove("hidden");
-      })
+      });
+      musicPlayer.classList.remove("hidden");
       clock.style.border = "3px solid var(--clock-border-color)";
       clock.style.backgroundColor = "var(--clock-background-color)";
       clock.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
@@ -287,12 +302,12 @@ function setDeadline(e) {
   [deadlineHour, deadlineMinute] = deadlineInput.split(":");
 
   deadline = new Date(0, 0, 0, deadlineHour, deadlineMinute);
-  warning = new Date(deadline - (warningInput * 60000));
+  warning = new Date(deadline - warningInput * 60000);
 
   let section = e.target.parentElement;
-  section.classList.add('hidden');
+  section.classList.add("hidden");
   e.target.lastElementChild.value = "Update";
-  }
+}
 
 // set the time and run the updateTime function when the page loads
 setHourDisplay(getHourString(new Date()));
@@ -302,6 +317,9 @@ hourChime.volume = 0.7;
 
 // run the changeColor function when the page loads so default colors are set
 changeColor();
+
+// run the setIcons function when the page loads so default icons are set
+setIcons();
 
 // run the loadToDoList function when the page loads
 loadToDoList();
@@ -352,5 +370,13 @@ chimeCheckbox.addEventListener("change", () => {
 alarmOffBtn.addEventListener("click", () => {
   deadlineAlarm.pause();
   deadlineAlarm.currentTime = 0;
-  alarmOffBtn.classList.add('hidden');
-})
+  alarmOffBtn.classList.add("hidden");
+});
+
+document.addEventListener("click", function (event) {
+  if (event.target === document.body) {
+    sectionContainers.forEach((container) => {
+      container.classList.add("hidden");
+    });
+  }
+});
