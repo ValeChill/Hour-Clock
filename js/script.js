@@ -89,10 +89,12 @@ function triggerTimeEvent(cTime, tTime, sound, type = "") {
   // cTime = current time; tTime = trigger time
   let tH = tTime.getHours();
   let tM = tTime.getMinutes();
+  let tS = tTime.getSeconds();
   let cH = cTime.getHours();
   let cM = cTime.getMinutes();
+  let cS = cTime.getSeconds();
 
-  if (tH === cH && tM === cM) {
+  if (tH === cH && tM === cM && tS === cS) {
     sound.play();
     if (type == "warning") {
       minutesCheckbox.checked = true;
@@ -101,6 +103,13 @@ function triggerTimeEvent(cTime, tTime, sound, type = "") {
       alarmOffBtn.classList.remove("hidden");
       deadlineForm.lastElementChild.value = "Add";
       deadline = null;
+    } else if (type === "pomodoro-end") {
+      // end of work time; calculate break time end
+      breakDeadline = new Date(Date.now() + breakTime);
+      workDeadline = null;
+    } else if (type === "pomodoro-start") {
+      breakDeadline = null;
+      workDeadline = new Date(Date.now() + workTime);
     }
   }
 }
@@ -118,6 +127,14 @@ function updateTime() {
 
   if (deadline) {
     triggerTimeEvent(time, deadline, deadlineAlarm, "deadline");
+  }
+
+  if (workDeadline) {
+    triggerTimeEvent(time, workDeadline, pomodoroEnd, "pomodoro-end");
+  }
+
+  if (breakDeadline) {
+    triggerTimeEvent(time, breakDeadline, pomodoroStart, "pomodoro-start");
   }
 
   if (minutesCheckbox.checked) {
@@ -330,12 +347,12 @@ function setPomodoro(e) {
   workTime = durationInput * 60000 // duration in ms
   breakTime = breakInput * 60000 // duration in ms
 
-  workDeadline = Date.now() + workTime;
+  workDeadline = new Date(Date.now() + workTime);
 
   let section = e.target.parentElement;
   section.classList.add("hidden");
   e.target.lastElementChild.value = "Reset";
-  console.log(new Date(workDeadline).getHours(), new Date(workDeadline).getMinutes());
+  pomodoroStart.play();
 }
 
 // set the time and run the updateTime function when the page loads
