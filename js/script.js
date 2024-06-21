@@ -10,6 +10,8 @@ let currentHour = new Date().getHours();
 const hourChime = document.querySelector("#hour-chime");
 const deadlineAlarm = document.querySelector("#deadline-alarm");
 const warningSound = document.querySelector("#warning-sound");
+const pomodoroStart = document.querySelector("#pomodoro-start");
+const pomodoroEnd = document.querySelector('#pomodoro-end');
 
 // to-do list variables
 const toDoList = document.querySelector("#to-do-list");
@@ -39,6 +41,15 @@ let warning = null;
 
 // music player variables
 const musicPlayer = document.querySelector(".music-controls");
+
+// pomodoro variables
+const pomodoroForm = document.querySelector('#pomodoro-form');
+const pomodoroDuration = document.querySelector('#pomodoro-duration');
+const pomodoroBreakDuration = document.querySelector('#break-duration');
+let workTime = null;
+let breakTime = null;
+let workDeadline = null;
+let breakDeadline = null;
 
 function getHourString(time) {
   let h = time.getHours();
@@ -75,6 +86,7 @@ function getMinuteString(time) {
 }
 
 function triggerTimeEvent(cTime, tTime, sound, type = "") {
+  // cTime = current time; tTime = trigger time
   let tH = tTime.getHours();
   let tM = tTime.getMinutes();
   let cH = cTime.getHours();
@@ -309,6 +321,23 @@ function setDeadline(e) {
   e.target.lastElementChild.value = "Update";
 }
 
+function setPomodoro(e) {
+  e.preventDefault();
+  // get values
+  const durationInput = pomodoroDuration.value;
+  const breakInput = pomodoroBreakDuration.value;
+
+  workTime = durationInput * 60000 // duration in ms
+  breakTime = breakInput * 60000 // duration in ms
+
+  workDeadline = Date.now() + workTime;
+
+  let section = e.target.parentElement;
+  section.classList.add("hidden");
+  e.target.lastElementChild.value = "Reset";
+  console.log(new Date(workDeadline).getHours(), new Date(workDeadline).getMinutes());
+}
+
 // set the time and run the updateTime function when the page loads
 setHourDisplay(getHourString(new Date()));
 updateTime();
@@ -334,6 +363,7 @@ toDoForm.addEventListener("submit", addToDoItem);
 toDoList.addEventListener("click", removeToDoItem);
 toDoList.addEventListener("change", lineThrough);
 deadlineForm.addEventListener("submit", setDeadline);
+pomodoroForm.addEventListener("submit", setPomodoro);
 
 // add event listeners to the color buttons
 colorButtons.forEach((button) => {
