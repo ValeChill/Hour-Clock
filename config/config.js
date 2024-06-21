@@ -100,7 +100,8 @@ export const icons = {
   "to-do-icon": "list-ul",
   "deadline-icon": "alarm-exclamation",
   "music-icon": "music",
-  "alarm-off-icon": "alarm-off"
+  "alarm-off-icon": "alarm-off",
+  "pomodoro-icon": "timer"
   /* this icons not used i think??
   "play-icon": "play",
   "pause-icon": "pause",

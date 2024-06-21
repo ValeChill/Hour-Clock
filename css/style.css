@@ -259,9 +259,42 @@ h2 {
 
 .stop-alarm-button {
   position: absolute;
-  top: 230px;
-  right: 20px;
+  top: 160px;
+  right: 100px;
   display: flex;
   transform: scaleY(1.15) scaleX(1.15);
   /* needs a stand-out color */
+}
+
+/* Pomodoro section */
+
+.pomodoro-button {
+  position: absolute;
+  top: 300px;
+  right: 20px;
+  display: flex;
+  transform: scaleY(1.15) scaleX(1.15);
+}
+
+#pomodoro-container, #pomodoro-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#pomodoro-container h2 {
+  font-size: 2.5em;
+  text-align: center;
+}
+
+#pomodoro-duration, #break-duration {
+  font-size: 1em;
+  padding: 0.7em;
+  border: 1px solid var(--todo-textbox-border-color);
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+}
+
+#set-pomodoro {
+  font-size: 1em;
 }
