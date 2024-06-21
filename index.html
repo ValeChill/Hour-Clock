@@ -163,6 +163,30 @@
       </div>
     </div>
 
+    <article class="pomodoro-section">
+      <button class="pomodoro-button section-button">
+        <box-icon id="pomodoro-icon"></box-icon>
+      </button>
+      <section id="pomodoro-container" class="section-container hidden">
+        <h2>Pomodoro Timer</h2>
+        <form action="" id="pomodoro-form">
+          <input
+            id="pomodoro-duration"
+            type="number"
+            min="1"
+            max="120"
+            placeholder="Work time duration" />
+          <input
+            id="break-duration"
+            type="number"
+            min="1"
+            max="60"
+            placeholder="Break time duration" />
+          <input type="submit" id="set-pomodoro" value="Start Working" />
+        </form>
+      </section>
+    </article>
+
     <button class="stop-alarm-button hidden">
       <box-icon id='alarm-off'></box-icon>
     </button>
@@ -171,6 +195,8 @@
     <audio id="hour-chime" src="audio/chime.mp3"></audio>
     <audio id="deadline-alarm" src="audio/deadline-alarm.mp3"></audio>
     <audio src="audio/warning.mp3" id="warning-sound"></audio>
+    <audio src="audio/pomodoro-start.mp3" id="pomodoro-start"></audio>
+    <audio src="audio/pomodoro-end.mp3" id="pomodoro-end"></audio>
     <script type="module" src="js/script.js"></script>
     <script type="module" src="widgets/music/app.js"></script>
     <script type="module" src="config/config.js"></script>
