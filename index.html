@@ -23,7 +23,7 @@
         <h2>To-Do List</h2>
         <ul id="to-do-list"></ul>
         <form action="" id="to-do-form">
-          <input id="to-do" type="text" placeholder="Add a to-do" />
+          <input id="to-do" type="text" placeholder="Add a to-do" required />
           <input id="add-to-do" type="submit" value="Add" />
         </form>
       </section>
@@ -76,14 +76,13 @@
       <section id="deadline-container" class="hidden section-container">
         <h2>Set a Deadline</h2>
         <form action="" id="deadline-form">
-          <input id="deadline" type="time" />
+          <input id="deadline" type="time" required/>
           <input
             id="warning-time"
             type="number"
             max="60"
             min="1"
-            placeholder="Warning time in minutes"
-          />
+            placeholder="Warning time in minutes" />
           <input type="submit" id="add-deadline" value="Add" />
         </form>
       </section>
@@ -175,13 +174,15 @@
             type="number"
             min="1"
             max="120"
-            placeholder="Work time duration" />
+            placeholder="Work time duration"
+            required />
           <input
             id="break-duration"
             type="number"
             min="1"
             max="60"
-            placeholder="Break time duration" />
+            placeholder="Break time duration"
+            required />
           <input type="submit" id="set-pomodoro" value="Start Working" />
         </form>
       </section>
