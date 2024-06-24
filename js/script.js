@@ -50,8 +50,8 @@ let workTime = null;
 let breakTime = null;
 let workDeadline = null;
 let breakDeadline = null;
-let borderStart = 0;
 let borderEnd = 0;
+let borderInc = 0;
 
 function getHourString(time) {
   let h = time.getHours();
@@ -109,9 +109,11 @@ function triggerTimeEvent(cTime, tTime, sound, type = "") {
       // end of work time; calculate break time end
       breakDeadline = new Date(Date.now() + breakTime);
       workDeadline = null;
+      borderInc = -1 * (360 / (breakTime / 1000));
     } else if (type === "pomodoro-start") {
       breakDeadline = null;
       workDeadline = new Date(Date.now() + workTime);
+      borderInc = 360 / (workTime / 1000);
     }
   }
 }
@@ -123,16 +125,15 @@ function updateTime() {
   let m = time.getMinutes();
   let timeDisplay;
 
-  if (borderEnd + 15 > 360 && borderEnd < 360) {
+  if (borderEnd + borderInc > 360 && borderEnd < 360) {
     borderEnd = 360;
-  } else if (borderEnd + 15 > 360) {
+  } else if (borderEnd + borderInc > 360 || (borderEnd + borderInc < 0)) {
     borderEnd = 0;
   } else {
-    borderEnd += 15;
+    borderEnd += borderInc;
   }
-  console.log(`{borderStart}deg`, `{borderEnd}deg`);
 
-  setPomodoroBorder(`${borderStart}deg`, `${borderEnd}deg`);
+  setPomodoroBorder(`${borderEnd}deg`);
 
   if (warning) {
     triggerTimeEvent(time, warning, warningSound, "warning");
@@ -360,6 +361,8 @@ function setPomodoro(e) {
   workTime = durationInput * 60000 // duration in ms
   breakTime = breakInput * 60000 // duration in ms
 
+  borderInc = 360 / (workTime / 1000);
+
   workDeadline = new Date(Date.now() + workTime);
 
   let section = e.target.parentElement;
@@ -368,8 +371,7 @@ function setPomodoro(e) {
   pomodoroStart.play();
 }
 
-function setPomodoroBorder(startAngle, endAngle) {
-  clock.style.setProperty('--border-start', startAngle);
+function setPomodoroBorder(endAngle) {
   clock.style.setProperty('--border-end', endAngle);
 }
 
