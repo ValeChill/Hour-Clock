@@ -13,6 +13,8 @@
   --delete-button-background-color: #ffffff; /* Light grey border for delete button */
   --delete-button-border-color: #e0e0e0; /* Light grey border for delete button */
   --icon-color: #e0e0e0; /* Light grey color for icons */
+  --highlight-gradient-start: #ff7f50; /* warning colour for alarm stop button and pomodoro gradient */
+  --highlight-gradient-end: #ff6347; /* gradient end colour */
 }
 
 /* Padding and margin on elements can have surprising results with element size,
@@ -77,8 +79,8 @@ body {
   border-radius: 20px;
   background: conic-gradient(
     from 0deg,
-    var(--text-color) var(--border-start),
-    var(--icon-color) var(--border-end),
+    var(--highlight-gradient-start) var(--border-start),
+    var(--highlight-gradient-end) var(--border-end),
     transparent var(--border-end),
     transparent 360deg
   );
