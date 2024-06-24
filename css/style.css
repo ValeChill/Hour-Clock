@@ -45,6 +45,9 @@ body {
 /* Clock styling */
 
 .clock {
+  --border-start: 0deg;
+  --border-end: 0deg;
+
   background-color: var(--clock-background-color); /* See :root */
   border: 3px solid var(--clock-border-color); /* See :root */
   border-radius: 20px; /* Rounded corners */
@@ -57,6 +60,28 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* set sizing and position for pomodoro border */
+  box-sizing: border-box;
+  position: relative;
+}
+
+.clock:before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  bottom: -6px;
+  left: -6px;
+  z-index: -1;
+  border-radius: 20px;
+  background: conic-gradient(
+    from 0deg,
+    var(--text-color) var(--border-start),
+    var(--icon-color) var(--border-end),
+    transparent var(--border-end),
+    transparent 360deg
+  );
 }
 
 /* Large font size for hour display */

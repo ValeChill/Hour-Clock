@@ -50,6 +50,8 @@ let workTime = null;
 let breakTime = null;
 let workDeadline = null;
 let breakDeadline = null;
+let borderStart = 0;
+let borderEnd = 0;
 
 function getHourString(time) {
   let h = time.getHours();
@@ -120,6 +122,17 @@ function updateTime() {
   let h = time.getHours();
   let m = time.getMinutes();
   let timeDisplay;
+
+  if (borderEnd + 15 > 360 && borderEnd < 360) {
+    borderEnd = 360;
+  } else if (borderEnd + 15 > 360) {
+    borderEnd = 0;
+  } else {
+    borderEnd += 15;
+  }
+  console.log(`{borderStart}deg`, `{borderEnd}deg`);
+
+  setPomodoroBorder(`${borderStart}deg`, `${borderEnd}deg`);
 
   if (warning) {
     triggerTimeEvent(time, warning, warningSound, "warning");
@@ -353,6 +366,11 @@ function setPomodoro(e) {
   section.classList.add("hidden");
   e.target.lastElementChild.value = "Reset";
   pomodoroStart.play();
+}
+
+function setPomodoroBorder(startAngle, endAngle) {
+  clock.style.setProperty('--border-start', startAngle);
+  clock.style.setProperty('--border-end', endAngle);
 }
 
 // set the time and run the updateTime function when the page loads
