@@ -22,7 +22,13 @@ Welcome to **PureHour**, a sleek and customizable productivity tool designed to 
 - **Interactive Interface**: Add, complete, and manage tasks seamlessly with a user-friendly interface.
 - **Persistent Storage**: Your to-do list entries are stored locally for convenience.
 
-### Deadline Timer ⏰ (Work in Progress)
+### Pomodoro Feature 🍅
+
+- **Time Management**: Boost your productivity with the Pomodoro technique integrated into PureHour.
+- **Customizable Timers**: Set work and break intervals according to your preferences.
+- **Visible Countdown**: Stay informed about your Pomodoro sessions with a visible countdown timer.
+
+### Deadline Timer ⏰
 
 - **Set Deadlines**: Define deadlines for your tasks and projects with a customizable timer.
 - **Warning Notifications**: Receive timely warnings before deadlines with customizable sound alerts.
@@ -51,12 +57,6 @@ Welcome to **PureHour**, a sleek and customizable productivity tool designed to 
 - **Ambient Sounds**: Enhance your productivity environment with optional soundscape features.
 - **Customizable Sound Mix**: Select from a variety of ambient sounds and adjust their volume levels.
 - **Royalty-Free Content**: All sounds are sourced from royalty-free sources for legal and ethical use.
-
-### Pomodoro Feature 🍅 (Planned)
-
-- **Time Management**: Boost your productivity with the Pomodoro technique integrated into PureHour.
-- **Customizable Timers**: Set work and break intervals according to your preferences.
-- **Visible Countdown**: Stay informed about your Pomodoro sessions with a visible countdown timer.
 
 ## Getting Started 🚀
 
