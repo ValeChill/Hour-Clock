@@ -282,8 +282,9 @@ h2 {
   text-align: center;
 }
 
-#add-deadline {
+#add-deadline, #clear-deadline {
   font-size: 1em;
+  margin: 5px;
 }
 
 .stop-alarm-button {
@@ -293,6 +294,11 @@ h2 {
   display: flex;
   transform: scaleY(1.15) scaleX(1.15);
   /* needs a stand-out color */
+}
+
+.warning {
+  background-color: var(--highlight-color-1) !important;
+  color: var(--button-text-color) !important;
 }
 
 /* Pomodoro section */
@@ -324,6 +330,7 @@ h2 {
   text-align: center;
 }
 
-#set-pomodoro {
+#set-pomodoro, #clear-pomodoro {
   font-size: 1em;
+  margin: 5px;
 }

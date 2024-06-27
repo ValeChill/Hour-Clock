@@ -337,38 +337,61 @@ function checkFullscreen() {
 
 function setDeadline(e) {
   e.preventDefault();
-  // get values
-  const deadlineInput = deadlineTime.value;
-  const warningInput = deadlineWarning.value;
+  if (e.submitter.id == "add-deadline") {
+    // get values
+    const deadlineInput = deadlineTime.value;
+    const warningInput = deadlineWarning.value;
 
-  let deadlineHour, deadlineMinute;
-  [deadlineHour, deadlineMinute] = deadlineInput.split(":");
+    let deadlineHour, deadlineMinute;
+    [deadlineHour, deadlineMinute] = deadlineInput.split(":");
 
-  deadline = new Date(0, 0, 0, deadlineHour, deadlineMinute);
-  warning = new Date(deadline - warningInput * 60000);
+    deadline = new Date(0, 0, 0, deadlineHour, deadlineMinute);
+    warning = new Date(deadline - warningInput * 60000);
 
+    e.submitter.value = "Update";
+    e.submitter.nextElementSibling.classList.remove("hidden");
+  } else if (e.submitter.id == "clear-deadline") {
+    deadline = null;
+    warning = null;
+    e.submitter.classList.add("hidden");
+    e.submitter.previousElementSibling.value = "Set Deadline";
+  }
   let section = e.target.parentElement;
   section.classList.add("hidden");
-  e.target.lastElementChild.value = "Update";
 }
 
 function setPomodoro(e) {
   e.preventDefault();
-  // get values
-  const durationInput = pomodoroDuration.value;
-  const breakInput = pomodoroBreakDuration.value;
+  if (e.submitter.id == "set-pomodoro") {
+    // get values
+    const durationInput = pomodoroDuration.value;
+    const breakInput = pomodoroBreakDuration.value;
 
-  workTime = durationInput * 60000 // duration in ms
-  breakTime = breakInput * 60000 // duration in ms
+    workTime = durationInput * 60000 // duration in ms
+    breakTime = breakInput * 60000 // duration in ms
 
-  borderInc = 360 / (workTime / 1000);
+    borderInc = 360 / (workTime / 1000);
 
-  workDeadline = new Date(Date.now() + workTime);
+    workDeadline = new Date(Date.now() + workTime);
 
+    e.submitter.value = "Reset";
+    e.submitter.nextElementSibling.classList.remove("hidden");
+    pomodoroStart.play();
+  } else if (e.submitter.id == "clear-pomodoro") {
+    workTime = null;
+    breakTime = null;
+    workDeadline = null;
+    breakDeadline = null;
+    borderInc = 0;
+    borderEnd = 0;
+    setPomodoroBorder(`${borderEnd}deg`);
+
+    e.submitter.previousSibling.value = "Add";
+    e.submitter.classList.add("hidden");
+    pomodoroEnd.play();
+  }
   let section = e.target.parentElement;
   section.classList.add("hidden");
-  e.target.lastElementChild.value = "Reset";
-  pomodoroStart.play();
 }
 
 function setPomodoroBorder(endAngle) {

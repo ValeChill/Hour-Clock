@@ -86,6 +86,7 @@
             min="1"
             placeholder="Warning time in minutes" />
           <input type="submit" id="add-deadline" value="Add" />
+          <input type="submit" id="clear-deadline" value="Cancel Alarm" class="warning hidden"/>
         </form>
       </section>
     </article>
@@ -186,11 +187,12 @@
             placeholder="Break time duration"
             required />
           <input type="submit" id="set-pomodoro" value="Start Working" />
+          <input type="submit" id="clear-pomodoro" value="Stop Pomodoro" class="warning hidden" />
         </form>
       </section>
     </article>
 
-    <button class="stop-alarm-button hidden">
+    <button class="stop-alarm-button warning hidden">
       <box-icon id='alarm-off-icon'></box-icon>
     </button>
 
