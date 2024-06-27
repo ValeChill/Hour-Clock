@@ -13,6 +13,8 @@
   --delete-button-background-color: #ffffff; /* Light grey border for delete button */
   --delete-button-border-color: #e0e0e0; /* Light grey border for delete button */
   --icon-color: #e0e0e0; /* Light grey color for icons */
+  --highlight-color-1: #ff5722; /* warning colour for alarm stop button and pomodoro gradient */
+  --highlight-color-2: #e64a19; /* gradient end colour */
 }
 
 /* Padding and margin on elements can have surprising results with element size,
@@ -45,6 +47,9 @@ body {
 /* Clock styling */
 
 .clock {
+  --border-start: 0deg;
+  --border-end: 0deg;
+
   background-color: var(--clock-background-color); /* See :root */
   border: 3px solid var(--clock-border-color); /* See :root */
   border-radius: 20px; /* Rounded corners */
@@ -57,6 +62,30 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* set sizing and position for pomodoro border */
+  box-sizing: border-box;
+  position: relative;
+}
+
+.clock::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  bottom: -6px;
+  left: -6px;
+  z-index: -1;
+  border-radius: 20px;
+  background: conic-gradient(
+    from 0deg,
+    var(--highlight-color-1) var(--border-start),
+    var(--highlight-color-2) var(--border-end),
+    transparent var(--border-end),
+    transparent 360deg
+  );
+  mask-image: radial-gradient(circle, transparent 60%, var(--background-color) 16px);
+  filter: blur(5px);
 }
 
 /* Large font size for hour display */
@@ -253,15 +282,55 @@ h2 {
   text-align: center;
 }
 
-#add-deadline {
+#add-deadline, #clear-deadline {
   font-size: 1em;
+  margin: 5px;
 }
 
 .stop-alarm-button {
   position: absolute;
-  top: 230px;
-  right: 20px;
+  top: 160px;
+  right: 100px;
   display: flex;
   transform: scaleY(1.15) scaleX(1.15);
   /* needs a stand-out color */
+}
+
+.warning {
+  background-color: var(--highlight-color-1) !important;
+  color: var(--button-text-color) !important;
+}
+
+/* Pomodoro section */
+
+.pomodoro-button {
+  position: absolute;
+  top: 300px;
+  right: 20px;
+  display: flex;
+  transform: scaleY(1.15) scaleX(1.15);
+}
+
+#pomodoro-container, #pomodoro-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#pomodoro-container h2 {
+  font-size: 2.5em;
+  text-align: center;
+}
+
+#pomodoro-duration, #break-duration {
+  font-size: 1em;
+  padding: 0.7em;
+  border: 1px solid var(--todo-textbox-border-color);
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+}
+
+#set-pomodoro, #clear-pomodoro {
+  font-size: 1em;
+  margin: 5px;
 }

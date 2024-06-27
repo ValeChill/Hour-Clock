@@ -90,12 +90,10 @@
 
 ## Pomodoro Feature
 
-- [ ] Add pomodoro feature
-- [ ] Add pomodoro pop-up in HTML
-- [ ] Include HTML to set work timer and break timer
-- [ ] Add JavaScript for pomodoro pop-up toggle
-- [ ] Write function to set pomodoro timer (take duration as input for work or break)
-- [ ] Add HTML display for active pomodoro timer
-- [ ] Ensure timer is only visible while active
-- [ ] Add CSS styling for to-do list and entries
-- [ ] Decide whether to store to-do entries and status locally, or reset when the page is closed
+- [x] Add pomodoro feature
+- [x] Add pomodoro pop-up in HTML
+- [x] Include HTML to set work timer and break timer
+- [x] Add JavaScript for pomodoro pop-up toggle
+- [x] Write function to set pomodoro timer (take duration as input for work or break)
+- [x] Add HTML display for active pomodoro timer
+- [x] Ensure timer is only visible while active

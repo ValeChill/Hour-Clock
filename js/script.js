@@ -10,6 +10,8 @@ let currentHour = new Date().getHours();
 const hourChime = document.querySelector("#hour-chime");
 const deadlineAlarm = document.querySelector("#deadline-alarm");
 const warningSound = document.querySelector("#warning-sound");
+const pomodoroStart = document.querySelector("#pomodoro-start");
+const pomodoroEnd = document.querySelector('#pomodoro-end');
 
 // to-do list variables
 const toDoList = document.querySelector("#to-do-list");
@@ -39,6 +41,17 @@ let warning = null;
 
 // music player variables
 const musicPlayer = document.querySelector(".music-controls");
+
+// pomodoro variables
+const pomodoroForm = document.querySelector('#pomodoro-form');
+const pomodoroDuration = document.querySelector('#pomodoro-duration');
+const pomodoroBreakDuration = document.querySelector('#break-duration');
+let workTime = null;
+let breakTime = null;
+let workDeadline = null;
+let breakDeadline = null;
+let borderEnd = 0;
+let borderInc = 0;
 
 function getHourString(time) {
   let h = time.getHours();
@@ -75,12 +88,15 @@ function getMinuteString(time) {
 }
 
 function triggerTimeEvent(cTime, tTime, sound, type = "") {
+  // cTime = current time; tTime = trigger time
   let tH = tTime.getHours();
   let tM = tTime.getMinutes();
+  let tS = tTime.getSeconds();
   let cH = cTime.getHours();
   let cM = cTime.getMinutes();
+  let cS = cTime.getSeconds();
 
-  if (tH === cH && tM === cM) {
+  if (tH === cH && tM === cM && tS === cS) {
     sound.play();
     if (type == "warning") {
       minutesCheckbox.checked = true;
@@ -89,6 +105,15 @@ function triggerTimeEvent(cTime, tTime, sound, type = "") {
       alarmOffBtn.classList.remove("hidden");
       deadlineForm.lastElementChild.value = "Add";
       deadline = null;
+    } else if (type === "pomodoro-end") {
+      // end of work time; calculate break time end
+      breakDeadline = new Date(Date.now() + breakTime);
+      workDeadline = null;
+      borderInc = -1 * (360 / (breakTime / 1000));
+    } else if (type === "pomodoro-start") {
+      breakDeadline = null;
+      workDeadline = new Date(Date.now() + workTime);
+      borderInc = 360 / (workTime / 1000);
     }
   }
 }
@@ -100,12 +125,30 @@ function updateTime() {
   let m = time.getMinutes();
   let timeDisplay;
 
+  if (borderEnd + borderInc > 360 && borderEnd < 360) {
+    borderEnd = 360;
+  } else if (borderEnd + borderInc > 360 || (borderEnd + borderInc < 0)) {
+    borderEnd = 0;
+  } else {
+    borderEnd += borderInc;
+  }
+
+  setPomodoroBorder(`${borderEnd}deg`);
+
   if (warning) {
     triggerTimeEvent(time, warning, warningSound, "warning");
   }
 
   if (deadline) {
     triggerTimeEvent(time, deadline, deadlineAlarm, "deadline");
+  }
+
+  if (workDeadline) {
+    triggerTimeEvent(time, workDeadline, pomodoroEnd, "pomodoro-end");
+  }
+
+  if (breakDeadline) {
+    triggerTimeEvent(time, breakDeadline, pomodoroStart, "pomodoro-start");
   }
 
   if (minutesCheckbox.checked) {
@@ -294,19 +337,65 @@ function checkFullscreen() {
 
 function setDeadline(e) {
   e.preventDefault();
-  // get values
-  const deadlineInput = deadlineTime.value;
-  const warningInput = deadlineWarning.value;
+  if (e.submitter.id == "add-deadline") {
+    // get values
+    const deadlineInput = deadlineTime.value;
+    const warningInput = deadlineWarning.value;
 
-  let deadlineHour, deadlineMinute;
-  [deadlineHour, deadlineMinute] = deadlineInput.split(":");
+    let deadlineHour, deadlineMinute;
+    [deadlineHour, deadlineMinute] = deadlineInput.split(":");
 
-  deadline = new Date(0, 0, 0, deadlineHour, deadlineMinute);
-  warning = new Date(deadline - warningInput * 60000);
+    deadline = new Date(0, 0, 0, deadlineHour, deadlineMinute);
+    warning = new Date(deadline - warningInput * 60000);
 
+    e.submitter.value = "Update";
+    e.submitter.nextElementSibling.classList.remove("hidden");
+  } else if (e.submitter.id == "clear-deadline") {
+    deadline = null;
+    warning = null;
+    e.submitter.classList.add("hidden");
+    e.submitter.previousElementSibling.value = "Set Deadline";
+  }
   let section = e.target.parentElement;
   section.classList.add("hidden");
-  e.target.lastElementChild.value = "Update";
+}
+
+function setPomodoro(e) {
+  e.preventDefault();
+  if (e.submitter.id == "set-pomodoro") {
+    // get values
+    const durationInput = pomodoroDuration.value;
+    const breakInput = pomodoroBreakDuration.value;
+
+    workTime = durationInput * 60000 // duration in ms
+    breakTime = breakInput * 60000 // duration in ms
+
+    borderInc = 360 / (workTime / 1000);
+
+    workDeadline = new Date(Date.now() + workTime);
+
+    e.submitter.value = "Reset";
+    e.submitter.nextElementSibling.classList.remove("hidden");
+    pomodoroStart.play();
+  } else if (e.submitter.id == "clear-pomodoro") {
+    workTime = null;
+    breakTime = null;
+    workDeadline = null;
+    breakDeadline = null;
+    borderInc = 0;
+    borderEnd = 0;
+    setPomodoroBorder(`${borderEnd}deg`);
+
+    e.submitter.previousSibling.value = "Add";
+    e.submitter.classList.add("hidden");
+    pomodoroEnd.play();
+  }
+  let section = e.target.parentElement;
+  section.classList.add("hidden");
+}
+
+function setPomodoroBorder(endAngle) {
+  clock.style.setProperty('--border-end', endAngle);
 }
 
 // set the time and run the updateTime function when the page loads
@@ -334,6 +423,7 @@ toDoForm.addEventListener("submit", addToDoItem);
 toDoList.addEventListener("click", removeToDoItem);
 toDoList.addEventListener("change", lineThrough);
 deadlineForm.addEventListener("submit", setDeadline);
+pomodoroForm.addEventListener("submit", setPomodoro);
 
 // add event listeners to the color buttons
 colorButtons.forEach((button) => {
