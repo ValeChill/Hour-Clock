@@ -13,8 +13,8 @@
   --delete-button-background-color: #ffffff; /* Light grey border for delete button */
   --delete-button-border-color: #e0e0e0; /* Light grey border for delete button */
   --icon-color: #e0e0e0; /* Light grey color for icons */
-  --highlight-gradient-start: #ff7f50; /* warning colour for alarm stop button and pomodoro gradient */
-  --highlight-gradient-end: #ff6347; /* gradient end colour */
+  --highlight-color-1: #ff5722; /* warning colour for alarm stop button and pomodoro gradient */
+  --highlight-color-2: #e64a19; /* gradient end colour */
 }
 
 /* Padding and margin on elements can have surprising results with element size,
@@ -68,7 +68,7 @@ body {
   position: relative;
 }
 
-.clock:before {
+.clock::before {
   content: "";
   position: absolute;
   top: -6px;
@@ -79,11 +79,13 @@ body {
   border-radius: 20px;
   background: conic-gradient(
     from 0deg,
-    var(--highlight-gradient-start) var(--border-start),
-    var(--highlight-gradient-end) var(--border-end),
+    var(--highlight-color-1) var(--border-start),
+    var(--highlight-color-2) var(--border-end),
     transparent var(--border-end),
     transparent 360deg
   );
+  mask-image: radial-gradient(circle, transparent 60%, var(--background-color) 16px);
+  filter: blur(5px);
 }
 
 /* Large font size for hour display */
